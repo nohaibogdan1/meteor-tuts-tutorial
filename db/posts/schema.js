@@ -7,7 +7,21 @@ export default new SimplSchema({
         type: String,
         optional: true
     },
-    views: Number,
-    createdAt: Date,
-    type: String
+    views: {
+        type: Number,
+        defaultValue: 0
+    },
+    createdAt: {
+        type: Date,
+        defaultValue: new Date()
+    },
+    postType: {
+        type: String,
+        allowedValues: [
+            'Nature', 'Psychology', 
+            'Music', 'Programming', 
+            'Project Management', 'Others'
+        ],
+        defaultValue: 'Nature'
+    }
 });
