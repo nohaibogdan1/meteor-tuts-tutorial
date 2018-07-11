@@ -26,5 +26,13 @@ Meteor.methods({
 
     'post.get' (_id) {
         return Posts.findOne(_id);
+    },
+
+    'post.views.increment' (_id) {
+        Posts.update(_id, {
+            $inc: {
+                views: 1
+            }
+        });
     }
 });
