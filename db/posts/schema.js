@@ -1,4 +1,6 @@
 import SimplSchema from 'simpl-schema';
+import PostTypesEnum from './enums/types';
+import _ from 'underscore';
 
 export default new SimplSchema({
     title: String,
@@ -17,11 +19,7 @@ export default new SimplSchema({
     },
     postType: {
         type: String,
-        allowedValues: [
-            'Nature', 'Psychology', 
-            'Music', 'Programming', 
-            'Project Management', 'Others'
-        ],
-        defaultValue: 'Nature'
+        allowedValues: _.values(PostTypesEnum),
+        defaultValue: _.values(PostTypesEnum)[0]
     }
 });
