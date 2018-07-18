@@ -18,8 +18,13 @@ if (Meteor.isServer){
             userId: 'test_user_id_2',
             postId: 'postid2'
         };
+        const commentThree = {
+            text: 'THREE I like this post',
+            userId: 'test_user_id_3',
+            postId: 'postid1'
+        };
         const post = {
-            _id: 'id_of_post',
+            _id: 'postid1',
             title: 'This is about pictures',
             description: 'I like pictures a lot',
             postType: 'nature'
@@ -29,6 +34,9 @@ if (Meteor.isServer){
             Comments.remove({});
             Posts.remove({});
             Posts.insert(post);
+            Comments.insert(commentOne);
+            Comments.insert(commentTwo);
+            Comments.insert(commentThree);
         });
         
         it('should create comment', function () {
@@ -53,8 +61,19 @@ if (Meteor.isServer){
 
         it('should not create comment if post with postId does not exist', function () {
             assert.throws(() => {Meteor.server.method_handlers['comment.create']
-                .apply({userId: commentOne.userId},[commentOne])});
+                .apply({userId: commentTwo.userId},[commentTwo])});
         });
+
+        it('should give all comments that belong to a post', function () {
+            let comments = Meteor.server.method_handlers['comment.list']
+                .apply({},[post._id]);
+            comments = comments.filter((value, index, array) => {
+                return value.postId === post._id;
+            });
+            assert.strictEqual(comments.length, 2);
+        });
+
+        
 
     });
 }
