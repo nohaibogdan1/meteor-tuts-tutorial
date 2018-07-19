@@ -1,5 +1,5 @@
 import {Meteor} from 'meteor/meteor';
-import {Comments} from '/db';
+import {Comments, Posts} from '/db';
 import Security from '/imports/api/security';
 import './../posts/methods';
 
@@ -15,6 +15,22 @@ Meteor.methods({
 
     'comment.list' (postId) {
         return Comments.find({postId}).fetch();
+    },
+
+    'comment.remove' (_id) {
+        Security.checkLoggedIn(this.userId);
+        Comments.remove({_id, userId: this.userId});
+        const comment = Comments.findOne({_id});
+        if (!comment) {
+            return;
+        }
+        console.log('comment',comment);
+        const post = Posts.findOne({_id: comment.postId});
+        console.log('post', post);
+        if (this.userId === post.userId) {
+            Comments.remove({_id});
+        }
     }
     
+
 });
