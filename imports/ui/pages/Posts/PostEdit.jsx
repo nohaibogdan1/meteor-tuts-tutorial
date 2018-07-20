@@ -9,13 +9,13 @@ export default class PostEdit extends React.Component {
     }
 
     componentDidMount() {
-        Meteor.call('post.get', this.props.match.params._id, (err, post) => {
+        Meteor.call('secured.post_get', this.props.match.params._id, (err, post) => {
             this.setState({post});
         });
     }
 
     submit = (post) => {
-        Meteor.call('post.edit', this.props.match.params._id, post, (err) => {
+        Meteor.call('secured.post_edit', this.props.match.params._id, post, (err) => {
             if (err) {
                 return alert(err.reason);
             }
