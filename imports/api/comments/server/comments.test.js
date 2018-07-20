@@ -26,6 +26,18 @@ if (Meteor.isServer){
             userId: 'test_user_id_3',
             postId: 'postid1'
         };
+        const commentFour = {
+            _id: 'commentid4',
+            text: 'FOUR I like this post',
+            userId: 'test_user_id_4',
+            postId: 'postid3'
+        };
+        const commentFive = {
+            _id: 'commentid5',
+            text: 'FIVE I like this post',
+            userId: 'test_user_id_5',
+            postId: 'postid3'
+        };
         const postOne = {
             _id: 'postid1',
             userId: 'post_user_id_1',
@@ -40,6 +52,7 @@ if (Meteor.isServer){
             description: 'I like music a lot',
             postType: 'nature'
         };
+            
     
         beforeEach(function() {
             Comments.remove({});
@@ -49,6 +62,8 @@ if (Meteor.isServer){
             Comments.insert(commentOne);
             Comments.insert(commentTwo);
             Comments.insert(commentThree);
+            Comments.insert(commentFour);
+            Comments.insert(commentFive);
         });
         
         it('should create comment', function () {
@@ -115,9 +130,13 @@ if (Meteor.isServer){
             }
         );
 
-        
+        it('should remove all comments if the post they belong is deleted', function () {
+            Meteor.server.method_handlers['comment.remove_all_by_post'].apply({},[commentFour.postId]);
+            const comments = Meteor.server.method_handlers['comment.list'].apply({}, [commentFour.postId]);
+            assert.strictEqual(comments.length, 0);
+        });
 
-    
+        
 
 
 
