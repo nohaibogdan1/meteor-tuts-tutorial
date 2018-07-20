@@ -32,6 +32,10 @@ Meteor.methods({
 
     'comment.remove_all_by_post' (postId) {
         Comments.remove({postId});
+    },
+
+    'comment.count_by_post' (postId) {
+        return Comments.find({postId}).count();
     }
     
 
