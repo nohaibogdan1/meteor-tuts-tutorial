@@ -67,32 +67,32 @@ if (Meteor.isServer){
         });
         
         it('should create comment', function () {
-            const _id = Meteor.server.method_handlers['comment.create'].apply({userId: commentOne.userId},
+            const _id = Meteor.server.method_handlers['secured.comment_create'].apply({userId: commentOne.userId},
                 [{text: commentOne.text, postId: commentOne.postId}]);
             assert.strictEqual(Comments.find({_id}).fetch().length, 1);
         });
 
         it('should not create comment if not authenticated', function () {
-            assert.throws(() => {Meteor.server.method_handlers['comment.create'].apply({});});
+            assert.throws(() => {Meteor.server.method_handlers['secured.comment_create'].apply({});});
         });
 
         it('should not create comment if text is not given', function () {
-            assert.throws(() => {Meteor.server.method_handlers['comment.create']
+            assert.throws(() => {Meteor.server.method_handlers['secured.comment_create']
                 .apply({userId: commentOne.userId},[{postId: commentOne.postId}]);});
         });
 
         it('should not create comment if postId is not given', function () {
-            assert.throws(() => {Meteor.server.method_handlers['comment.create']
+            assert.throws(() => {Meteor.server.method_handlers['secured.comment_create']
                 .apply({userId: commentOne.userId},[{text: commentOne.text}]);});
         });
 
         it('should not create comment if post with postId does not exist', function () {
-            assert.throws(() => {Meteor.server.method_handlers['comment.create']
+            assert.throws(() => {Meteor.server.method_handlers['secured.comment_create']
                 .apply({userId: commentTwo.userId},[commentTwo])});
         });
 
         it('should give all comments that belong to a post', function () {
-            let comments = Meteor.server.method_handlers['comment.list']
+            let comments = Meteor.server.method_handlers['secured.comment_list']
                 .apply({},[postOne._id]);
             comments = comments.filter((value, index, array) => {
                 return value.postId === postOne._id;
@@ -101,14 +101,14 @@ if (Meteor.isServer){
         });
 
         it('should remove a comment given the id if the authenticated user is the owner', function () {
-            Meteor.server.method_handlers['comment.remove']
+            Meteor.server.method_handlers['secured.comment_remove']
                 .apply({userId: commentOne.userId}, [commentOne._id]);
             assert.strictEqual(Comments.findOne({_id: commentOne._id}), undefined);
         });
 
         it('should not remove a comment given the id if the authenticated user is not the owner',
             function () {
-                Meteor.server.method_handlers['comment.remove']
+                Meteor.server.method_handlers['secured.comment_remove']
                     .apply({userId: commentTwo.userId}, [commentOne._id]);
                 assert.notStrictEqual(Comments.findOne({_id: commentOne._id}), undefined);
             }
@@ -116,7 +116,7 @@ if (Meteor.isServer){
 
         it('should remove a comment given the id if the authenticated user is the owner of the post', 
             function () {
-                Meteor.server.method_handlers['comment.remove']
+                Meteor.server.method_handlers['secured.comment_remove']
                     .apply({userId: postOne.userId}, [commentThree._id]);
                 assert.strictEqual(Comments.findOne({_id: commentThree._id}), undefined);                    
             }
@@ -124,20 +124,20 @@ if (Meteor.isServer){
 
         it('should not remove a comment given the id if the authenticated user is not the owner of the post', 
             function () {
-                Meteor.server.method_handlers['comment.remove']
+                Meteor.server.method_handlers['secured.comment_remove']
                     .apply({userId: postOne.userId}, [commentTwo._id]);
                 assert.notStrictEqual(Comments.findOne({_id: commentTwo._id}), undefined);                    
             }
         );
 
         it('should remove all comments if the post they belong is deleted', function () {
-            Meteor.server.method_handlers['comment.remove_all_by_post'].apply({},[commentFour.postId]);
-            const comments = Meteor.server.method_handlers['comment.list'].apply({}, [commentFour.postId]);
+            Meteor.server.method_handlers['secured.comment_remove_all_by_post'].apply({},[commentFour.postId]);
+            const comments = Meteor.server.method_handlers['secured.comment_list'].apply({}, [commentFour.postId]);
             assert.strictEqual(comments.length, 0);
         });
 
         it('should give the number of comments that belong to a post', function () {
-            const numberComments = Meteor.server.method_handlers['comment.count_by_post'].apply({},[postOne._id]);
+            const numberComments = Meteor.server.method_handlers['secured.comment_count_by_post'].apply({},[postOne._id]);
             assert.strictEqual(numberComments, 2);
         });
 
