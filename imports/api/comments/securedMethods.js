@@ -4,7 +4,7 @@ import Security from '/imports/api/security';
 import './../posts/methods';
 
 Meteor.methods({
-    'comment.create' (comment) {
+    'secured.comment_create' (comment) {
         Security.checkLoggedIn(this.userId);
         comment.userId = this.userId;
         if (!Meteor.call('post.get', comment.postId)) {
@@ -13,11 +13,11 @@ Meteor.methods({
         return Comments.insert(comment);
     },
 
-    'comment.list' (postId) {
+    'secured.comment_list' (postId) {
         return Comments.find({postId}).fetch();
     },
 
-    'comment.remove' (_id) {
+    'secured.comment_remove' (_id) {
         Security.checkLoggedIn(this.userId);
         Comments.remove({_id, userId: this.userId});
         const comment = Comments.findOne({_id});
@@ -30,11 +30,11 @@ Meteor.methods({
         }
     },
 
-    'comment.remove_all_by_post' (postId) {
+    'secured.comment_remove_all_by_post' (postId) {
         Comments.remove({postId});
     },
 
-    'comment.count_by_post' (postId) {
+    'secured.comment_count_by_post' (postId) {
         return Comments.find({postId}).count();
     }
     
