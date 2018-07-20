@@ -24,12 +24,14 @@ Meteor.methods({
         if (!comment) {
             return;
         }
-        console.log('comment',comment);
         const post = Posts.findOne({_id: comment.postId});
-        console.log('post', post);
         if (this.userId === post.userId) {
             Comments.remove({_id});
         }
+    },
+
+    'comment.remove_all_by_post' (postId) {
+        Comments.remove({postId});
     }
     
 
