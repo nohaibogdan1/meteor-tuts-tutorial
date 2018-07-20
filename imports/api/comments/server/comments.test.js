@@ -136,7 +136,10 @@ if (Meteor.isServer){
             assert.strictEqual(comments.length, 0);
         });
 
-        
+        it('should give the number of comments that belong to a post', function () {
+            const numberComments = Meteor.server.method_handlers['comment.count_by_post'].apply({},[postOne._id]);
+            assert.strictEqual(numberComments, 2);
+        });
 
 
 
