@@ -1,5 +1,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Comments, Posts} from '/db';
+import {listComments} from './../queries';
 import Security from '/imports/api/security';
 import './../posts/methods';
 
@@ -14,7 +15,9 @@ Meteor.methods({
     },
 
     'secured.comment_list' (postId) {
-        return Comments.find({postId}).fetch();
+        return listComments.clone({
+            postId
+        }).fetch();
     },
 
     'secured.comment_remove' (_id) {
