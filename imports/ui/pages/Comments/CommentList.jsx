@@ -1,13 +1,18 @@
 import React from 'react';
 import {AutoForm, LongTextField, HiddenField} from 'uniforms-unstyled';
-
+import CommentView from './CommentView';
 import FormSchema from './schema';
+
+import {Tracker} from 'meteor/tracker';
+import listCommentsQuery from '/imports/api/comments/queries/listComments';
+
+
 
 export default class CommentList extends React.Component {
     constructor() {
         super();
         this.state = {
-            comments: []
+            comments: null
         };
     };
 
@@ -16,30 +21,33 @@ export default class CommentList extends React.Component {
         comment.postId = this.props.postId;
         Meteor.call('secured.comment_create', comment, (err) => {
             if (err) {
-                return alert(err);
+                return console.log(err);
             }
-            alert('comment added');
         });
     };
 
     componentDidMount() {
-        comments = Meteor.call('secured.comment_list', this.props.postId, (err, comments) => {
-            this.setState({comments});
+        const query = listCommentsQuery.clone({postId:this.props.postId}); 
+        const subscriptionHandle = query.subscribe();
+        this.commentsTracker = Tracker.autorun(() => {
+            if(subscriptionHandle.ready()) {
+                const comments = query.fetch();
+                this.setState({comments});
+            }
         });
-    };
-    
-    listComments() {
-        return(
-            <ul>
-                {this.state.comments.map((comment) => {
-                    return comment.text;
-                })}
-            </ul>
-        );
+
     };
 
+    componentWillUnmount() {
+        this.commentsTracker.stop();
+    }
+ 
+
     render() {
-        const {postId} = this.props;
+        const {comments} = this.state;
+        if (!comments) {
+            return <div>Loading...</div>;
+        }
 
         return (
             <div>
@@ -49,7 +57,13 @@ export default class CommentList extends React.Component {
                 </AutoForm>
 
                 <h1>Component list</h1>
-                {this.listComments()}
+                {
+                    comments.map((comment) => {
+                        return (
+                            <CommentView key={comment._id} comment={comment}/>
+                        );
+                    })
+                }
             </div>
         );
     };
