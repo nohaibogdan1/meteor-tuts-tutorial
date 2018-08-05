@@ -3,8 +3,19 @@ import PostTypesEnum from './enums/types';
 import _ from 'underscore';
 
 export default new SimplSchema({
-    title: String,
-    description: String,
+    createdAt: {
+        type: Date,
+        defaultValue: new Date()
+    },
+    description: {
+        optional: true, //temporar
+        type: String
+    },
+    postType: {
+        type: String,
+        allowedValues: _.values(PostTypesEnum),
+        defaultValue: _.values(PostTypesEnum)[0]
+    },
     userId: {
         type: String,
         optional: true
@@ -13,13 +24,8 @@ export default new SimplSchema({
         type: Number,
         defaultValue: 0
     },
-    createdAt: {
-        type: Date,
-        defaultValue: new Date()
-    },
-    postType: {
+    title:  {
         type: String,
-        allowedValues: _.values(PostTypesEnum),
-        defaultValue: _.values(PostTypesEnum)[0]
+        optional: true//temprar
     }
 });
