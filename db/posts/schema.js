@@ -8,7 +8,6 @@ export default new SimplSchema({
         defaultValue: new Date()
     },
     description: {
-        optional: true, //temporar
         type: String
     },
     postType: {
@@ -17,15 +16,13 @@ export default new SimplSchema({
         defaultValue: _.values(PostTypesEnum)[0]
     },
     userId: {
-        type: String,
-        optional: true
+        type: String
     },
     views: {
         type: Number,
         defaultValue: 0
     },
     title:  {
-        type: String,
-        optional: true//temprar
+        type: String
     }
 });
