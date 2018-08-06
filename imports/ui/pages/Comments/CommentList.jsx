@@ -45,17 +45,17 @@ export default class CommentList extends React.Component {
     render() {
         const {comments} = this.state;
         if (!comments) {
-            return <div>Loading...</div>;
+            return <div>0 comments</div>;
         }
 
         return (
             <div>
+                <p>{(comments.length)} comments</p>
                 <AutoForm onSubmit={this.submit} schema={FormSchema}>
                     <LongTextField name="text"/>
                     <button type="submit">Add</button>
                 </AutoForm>
 
-                <h1>Component list</h1>
                 {
                     comments.map((comment) => {
                         return (
