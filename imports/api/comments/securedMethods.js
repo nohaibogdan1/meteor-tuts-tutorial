@@ -34,13 +34,6 @@ Meteor.methods({
         if (this.userId === post.userId) {
             Comments.remove({_id});
         }
-    },
-
-    'secured.comment_count_by_post' (postId) {
-        return listCommentsQuery.clone({
-            postId
-        }).getCount();
     }
-    
 
 });
