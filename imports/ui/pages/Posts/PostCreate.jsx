@@ -1,6 +1,6 @@
 import React from 'react';
 import {AutoForm, AutoField, LongTextField, SelectField} from 'uniforms-unstyled';
-import PostSchema from '/db/posts/schema';
+import FormSchema from './schema';
 import moment from 'moment';
 
 export default class PostCreate extends React.Component {
@@ -24,7 +24,7 @@ export default class PostCreate extends React.Component {
 
         return (
             <div className="post">
-                <AutoForm onSubmit={this.submit} schema={PostSchema}>
+                <AutoForm onSubmit={this.submit} schema={FormSchema}>
                     <AutoField name="title" />
                     <LongTextField name="description" />
                     <SelectField name="postType"/>
