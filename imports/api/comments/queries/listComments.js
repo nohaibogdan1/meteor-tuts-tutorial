@@ -5,6 +5,10 @@ export default Comments.createQuery('listComments', {
         filters.postId = params.postId;
     },
 
+    posts: {
+        userId: 1
+    },
+
     text: 1,
 
     users: {
