@@ -1,5 +1,7 @@
-import listComments from './comments/queries/listComments';
+import listCommentsQuery from './comments/queries/listComments';
+import listPostsQuery from './posts/queries/listPosts';
 
 export {
-    listComments
+    listCommentsQuery,
+    listPostsQuery
 }
