@@ -1,14 +1,37 @@
 import React from 'react';
-import {withTracker} from 'meteor/react-meteor-data';
-import {Posts} from '/db';
+import {Tracker} from 'meteor/tracker';
+import {listPostsQuery} from '/imports/api/queries';
 
-class PostListReactive extends React.Component {
+export default class PostList extends React.Component {
     constructor() {
         super();
+        this.state = {
+            posts: null
+        };
+    }
+
+    componentDidMount() {
+        const query = listPostsQuery.clone({});
+        const subscriptionHandle = query.subscribe();
+        this.postsTracker = Tracker.autorun(() => {
+            if (subscriptionHandle.ready()) {
+                const posts = query.fetch();
+                this.setState({posts});
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        this.postsTracker.stop();
+    }
+
+    delete(_id) {
+        Meteor.call('secured.post_remove', _id);
     }
 
     render() {
-        const {posts, history} = this.props;
+        const {posts} = this.state;
+        const {history} = this.props;
 
         if (!posts) {
             return <div>Loading....</div>
@@ -20,12 +43,22 @@ class PostListReactive extends React.Component {
                     posts.map((post) => {
                         return (
                             <div key={post._id}>
-                                <p>Post id: {post._id} </p>
-                                <p>Post title: {post.title}, Post Description: {post.description} </p>
-                                <button onClick={() => {
-                                    history.push("/posts/edit/" + post._id)
-                                }}> Edit post
-                                </button>
+                                <p>Post title: {post.title}</p>
+                                <p>Post Description: {post.description}</p>
+                                <p>{(post.comments)?post.comments.length:'0'} comments, {post.views} views</p>
+                                <button onClick={() => {history.push("/posts/view/" + post._id)}}>See post</button>
+                                {(post.userId === Meteor.userId()) ? 
+                                    (<div>
+                                        <button onClick={() => {
+                                                history.push("/posts/edit/" + post._id)}
+                                            }> Edit post
+                                        </button>
+                                        <button onClick={() => {
+                                                this.delete(post._id)}
+                                            }>Delete post
+                                        </button>
+                                    </div>):undefined
+                                }
                             </div>
                         )
                     })}
@@ -34,14 +67,3 @@ class PostListReactive extends React.Component {
         )
     }
 }
-
-
-export default withTracker(props => {
-    const handle = Meteor.subscribe('posts');
-
-    return {
-        loading: !handle.ready(),
-        posts: Posts.find().fetch(),
-        ...props
-    };
-})(PostListReactive);
