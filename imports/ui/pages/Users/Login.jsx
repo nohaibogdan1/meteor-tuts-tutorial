@@ -1,6 +1,6 @@
 import React from 'react';
 import {AutoForm, AutoField, ErrorsField} from 'uniforms-unstyled';
-import SimpleSchema from 'simpl-schema';
+import LoginSchema from './loginSchema';
 
 export default class Login extends React.Component {
     constructor() {
@@ -34,11 +34,3 @@ export default class Login extends React.Component {
         )
     }
 }
-
-const LoginSchema = new SimpleSchema({
-    email: {
-        type: String,
-        regEx: SimpleSchema.RegEx.Email
-    },
-    password: {type: String}
-});

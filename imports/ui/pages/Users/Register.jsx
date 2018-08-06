@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {AutoForm, AutoField, ErrorsField} from 'uniforms-unstyled';
-import SimpleSchema from 'simpl-schema';
+import RegisterSchema from './registerSchema';
 
 export default class Register extends Component {
     constructor() {
@@ -37,21 +37,3 @@ export default class Register extends Component {
         )
     }
 }
-
-const RegisterSchema = new SimpleSchema({
-    email: {
-        type: String,
-        regEx: SimpleSchema.RegEx.Email
-    },
-    password: {
-        type: String,
-    },
-    confirm_password: {
-        type: String,
-        custom() {
-            if (this.value !== this.field('password').value) {
-                return 'passwordMismatch';
-            }
-        }
-    },
-});
