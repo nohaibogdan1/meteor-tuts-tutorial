@@ -2,9 +2,7 @@ import {Meteor} from 'meteor/meteor';
 import {assert} from 'chai';
 
 import '../securedMethods';
-
-import {Comments} from '/db';
-import {Posts} from '/db';
+import {Comments, Posts} from '/db';
 
 if (Meteor.isServer){
     describe('comments', function () {
@@ -94,6 +92,7 @@ if (Meteor.isServer){
         it('should give all comments that belong to a post', function () {
             let comments = Meteor.server.method_handlers['secured.comment_list']
                 .apply({},[postOne._id]);
+            console.log('test: ',JSON.stringify(comments, 0, 2));
             comments = comments.filter((value, index, array) => {
                 return value.postId === postOne._id;
             });
@@ -130,19 +129,11 @@ if (Meteor.isServer){
             }
         );
 
-        it('should remove all comments if the post they belong is deleted', function () {
-            Meteor.server.method_handlers['secured.comment_remove_all_by_post'].apply({},[commentFour.postId]);
-            const comments = Meteor.server.method_handlers['secured.comment_list'].apply({}, [commentFour.postId]);
+        it('should remove all comments of a post if that post is deleted', function () {
+            Posts.remove({_id: postOne._id});
+            let comments = Meteor.server.method_handlers['secured.comment_list'].apply({}, [postOne._id]);
             assert.strictEqual(comments.length, 0);
         });
-
-        it('should give the number of comments that belong to a post', function () {
-            const numberComments = Meteor.server.method_handlers['secured.comment_count_by_post'].apply({},[postOne._id]);
-            assert.strictEqual(numberComments, 2);
-        });
-
-
-
 
     });
 }
