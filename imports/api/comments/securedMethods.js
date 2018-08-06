@@ -1,8 +1,10 @@
 import {Meteor} from 'meteor/meteor';
 import {Comments, Posts} from '/db';
-import {listComments} from './../queries';
+import {listCommentsQuery, listPostsQuery} from './../queries';
 import Security from '/imports/api/security';
 import './../posts/methods';
+import '/db/comments/links';
+import '/db/posts/links';
 
 Meteor.methods({
     'secured.comment_create' (comment) {
@@ -15,9 +17,10 @@ Meteor.methods({
     },
 
     'secured.comment_list' (postId) {
-        return listComments.clone({
+        const comments = listCommentsQuery.clone({
             postId
         }).fetch();
+        return comments;
     },
 
     'secured.comment_remove' (_id) {
@@ -33,12 +36,10 @@ Meteor.methods({
         }
     },
 
-    'secured.comment_remove_all_by_post' (postId) {
-        Comments.remove({postId});
-    },
-
     'secured.comment_count_by_post' (postId) {
-        return Comments.find({postId}).count();
+        return listCommentsQuery.clone({
+            postId
+        }).getCount();
     }
     
 
