@@ -4,7 +4,7 @@ import CommentView from './CommentView';
 import FormSchema from './schema';
 
 import {Tracker} from 'meteor/tracker';
-import listCommentsQuery from '/imports/api/comments/queries/listComments';
+import {listCommentsQuery} from '/imports/api/queries';
 
 
 
@@ -35,7 +35,6 @@ export default class CommentList extends React.Component {
                 this.setState({comments});
             }
         });
-
     };
 
     componentWillUnmount() {
