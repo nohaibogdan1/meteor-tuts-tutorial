@@ -1,16 +1,18 @@
 import {Meteor} from 'meteor/meteor'
 import {Posts} from '/db';
 import Security from '/imports/api/security';
+import {listPostsQuery} from '../queries';
 
 Meteor.methods({
     'secured.post_create'(post) {
         Security.checkLoggedIn(this.userId);
         post.userId = this.userId;
-        Posts.insert(post);
+        return Posts.insert(post);
     },
 
     'secured.post_list' () {
-        return Posts.find().fetch();
+        const posts = listPostsQuery.clone({}).fetch();
+        return posts;
     },
 
     'secured.post_edit' (_id, postData) {
@@ -27,6 +29,6 @@ Meteor.methods({
     },
 
     'secured.post_get' (_id) {
-        return Posts.findOne(_id);
+        return listPostsQuery.clone({_id}).fetchOne();
     }
 });
