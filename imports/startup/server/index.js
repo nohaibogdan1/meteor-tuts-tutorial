@@ -1,7 +1,7 @@
-import '/imports/api/methods'
-import '/imports/api/posts/methods';
-import '/imports/api/posts/securedMethods';
-import '/imports/api/comments/securedMethods';
-import '/imports/api/users/methods';
-import '/db/index.js';
-import '/imports/api/exposures';
+import '/imports/api/methods';
+// import '/imports/api/posts/server/methods';
+// import '/imports/api/posts/server/securedMethods';
+// import '/imports/api/comments/server/securedMethods';
+// import '/imports/api/users/server/methods';
+import '/imports/db';
+import '/imports/api/server';

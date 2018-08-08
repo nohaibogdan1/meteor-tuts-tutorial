@@ -4,7 +4,7 @@ import CommentView from './CommentView';
 import FormSchema from './schema';
 
 import {Tracker} from 'meteor/tracker';
-import {listCommentsQuery} from '/imports/api/queries';
+import {listCommentsQuery} from '/imports/db/queries';
 
 
 

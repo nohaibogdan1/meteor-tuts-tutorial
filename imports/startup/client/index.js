@@ -1,2 +1,2 @@
 import '/imports/ui/init';
-import '/db/index';
+import '/imports/db';
