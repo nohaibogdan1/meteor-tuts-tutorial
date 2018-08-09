@@ -1,6 +1,6 @@
 import {Meteor} from 'meteor/meteor'
+import {PostService} from '/imports/api/posts/services';
 
-import PostService from '/imports/api/posts/services';
 
 Meteor.methods({
     'secured.post_create'(post) {
@@ -21,5 +21,9 @@ Meteor.methods({
 
     'secured.post_get' (_id) {
         return PostService.getPost(_id);
+    },
+
+    'secured.views_increment' (_id) {
+        PostService.incrementViews(_id);
     }
 });
