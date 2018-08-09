@@ -8,6 +8,8 @@ import {listCommentsQuery} from '/imports/db/queries';
 
 
 
+
+
 export default class CommentList extends React.Component {
     constructor() {
         super();

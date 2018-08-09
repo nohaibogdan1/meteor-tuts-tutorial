@@ -12,7 +12,7 @@ export default class PostCreate extends React.Component {
         post.createdAt = moment().valueOf();
         Meteor.call('secured.post_create', post, (err) => {
             if (err) {
-                return alert(err.reason);
+                return console.log(err);
             }
             alert('Post added!')
         });

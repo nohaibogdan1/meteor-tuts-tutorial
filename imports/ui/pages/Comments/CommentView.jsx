@@ -28,7 +28,7 @@ export default class commentView extends React.Component {
         return (
             <div>
                 <div>{this.props.comment.text}</div>
-                <div>email: {this.props.comment.users.emails[0].address}</div>  
+                <div>email: {this.props.comment.users.emails[0].address}</div> 
                 {this.renderDelete()}
             </div>
         );
