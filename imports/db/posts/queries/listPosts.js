@@ -11,6 +11,8 @@ export default Posts.createQuery('listPosts', {
     },
     description: 1,
     title: 1,
+    postType: 1,
+    userId: 1,
     users: {
         emailAddress: 1
     },
