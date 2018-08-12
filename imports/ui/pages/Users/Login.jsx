@@ -1,4 +1,6 @@
 import React from 'react';
+import {Meteor} from 'meteor/meteor';
+import PropTypes from 'prop-types';
 import {AutoForm, AutoField, ErrorsField} from 'uniforms-unstyled';
 import LoginSchema from './loginSchema';
 
@@ -24,7 +26,7 @@ export default class Login extends React.Component {
                     <ErrorsField/>
 
                     <AutoField name="email"
-                               placeholder="Email"/>
+                        placeholder="Email"/>
 
                     <AutoField name="password" type="password" placeholder="Password"/>
 
@@ -33,4 +35,9 @@ export default class Login extends React.Component {
             </div>
         )
     }
+}
+
+
+Login.propTypes = {
+    history: PropTypes.object.isRequired
 }

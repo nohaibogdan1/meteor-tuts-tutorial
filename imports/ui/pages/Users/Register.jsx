@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {Meteor} from 'meteor/meteor';
+import PropTypes from 'prop-types';
 import {AutoForm, AutoField, ErrorsField} from 'uniforms-unstyled';
 import RegisterSchema from './registerSchema';
 
@@ -36,4 +38,9 @@ export default class Register extends Component {
             </div>
         )
     }
+}
+
+
+Register.propTypes = {
+    history: PropTypes.object.isRequired
 }
