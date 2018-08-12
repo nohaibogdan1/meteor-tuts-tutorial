@@ -7,11 +7,11 @@ import {listPostsQuery} from '/imports/db/queries';
 
 export default class PostService {
     static createPost(post) {
-        // Security.checkLoggedIn(Meteor.userId());
-        // post.userId = Meteor.userId();
+        Security.checkLoggedIn(Meteor.userId());
+        post.userId = Meteor.userId();
 
-        Security.checkLoggedIn(this.userId);
-        post.userId = this.userId;
+        // Security.checkLoggedIn(this.userId);
+        // post.userId = this.userId;
 
         return Posts.insert(post);
     };
@@ -22,24 +22,24 @@ export default class PostService {
     };
 
     static editPost(_id, postData) {
-        // Posts.update({_id, userId: Meteor.userId()}, {
-        //     $set: {
-        //         title: postData.title,
-        //         description: postData.description
-        //     }
-        // });
-
-        Posts.update({_id, userId: this.userId}, {
+        Posts.update({_id, userId: Meteor.userId()}, {
             $set: {
                 title: postData.title,
                 description: postData.description
             }
         });
+
+        // Posts.update({_id, userId: this.userId}, {
+        //     $set: {
+        //         title: postData.title,
+        //         description: postData.description
+        //     }
+        // });
     };
 
     static removePost(_id) {
-        // Posts.remove({_id, userId: Meteor.userId()});
-        Posts.remove({_id, userId: this.userId});
+        Posts.remove({_id, userId: Meteor.userId()});
+        // Posts.remove({_id, userId: this.userId});
         
     };
 

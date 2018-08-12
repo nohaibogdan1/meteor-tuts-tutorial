@@ -7,10 +7,10 @@ import Security from '/imports/api/security';
 
 export default class CommentService {
     static createComment(comment) {
-        // Security.checkLoggedIn(Meteor.userId());
-        // comment.userId = Meteor.userId();
-        Security.checkLoggedIn(this.userId);
-        comment.userId = this.userId;
+        Security.checkLoggedIn(Meteor.userId());
+        comment.userId = Meteor.userId();
+        // Security.checkLoggedIn(this.userId);
+        // comment.userId = this.userId;
         
         if (!Meteor.call('secured.post_get', comment.postId)) {
             throw new Meteor.Error('post does not exist');
@@ -20,10 +20,10 @@ export default class CommentService {
     }
 
     static removeComment(_id) {
-        // Security.checkLoggedIn(Meteor.userId());
-        // Comments.remove({_id, userId: Meteor.userId()});
-        Security.checkLoggedIn(this.userId);
-        Comments.remove({_id, userId: this.userId});
+        Security.checkLoggedIn(Meteor.userId());
+        Comments.remove({_id, userId: Meteor.userId()});
+        // Security.checkLoggedIn(this.userId);
+        // Comments.remove({_id, userId: this.userId});
 
         const comment = listCommentsQuery.clone({_id}).fetchOne();
         // if comment is not removed it means that the authenticated 
@@ -33,12 +33,12 @@ export default class CommentService {
             // that the comment belongs to
             // if it 's true the authenticated user can remove the comment
             const post = listPostsQuery.clone({_id: comment.postId}).fetchOne();
-            if (this.userId === post.userId) {
-                Comments.remove({_id});
-            }
-            // if (Meteor.userId() === post.userId) {
+            // if (this.userId === post.userId) {
             //     Comments.remove({_id});
             // }
+            if (Meteor.userId() === post.userId) {
+                Comments.remove({_id});
+            }
         }
     }
 }
