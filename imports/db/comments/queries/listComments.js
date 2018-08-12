@@ -10,6 +10,8 @@ export default Comments.createQuery('listComments', {
         }
     },
 
+    postId: 1,
+
     posts: {
         userId: 1
     },
