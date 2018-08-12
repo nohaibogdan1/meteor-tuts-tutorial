@@ -2,8 +2,14 @@
   "name": "meteor-tuts",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "lint": "eslint . --ext .jsx --fix"
   },
+  "lint-staged": {
+    "*.js": "eslint --fix",
+    "*.jsx": "eslint --fix"
+  },
+  "pre-commit": "lint-staged",
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.36",
     "apollo-live-server": "^0.2.0",
@@ -28,7 +34,15 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.6",
     "chai": "^4.1.2",
+    "eslint": "^5.3.0",
+    "eslint-import-resolver-meteor": "^0.4.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-meteor": "^5.0.0",
+    "eslint-plugin-react": "^7.10.0",
+    "lint-staged": "^7.2.0",
+    "pre-commit": "^1.2.2",
     "sinon": "^6.1.3"
   }
 }
