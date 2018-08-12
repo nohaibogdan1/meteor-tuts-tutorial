@@ -1,11 +1,16 @@
 import React from 'react';
+import {Meteor} from 'meteor/meteor';
+import PropTypes from 'prop-types';
+
+import PostElement from './PostElement';
 
 export default class PostList extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             posts: null
         };
+        this.navigateToCreatePage = this.navigateToCreatePage.bind(this);
     }
 
     componentDidMount() {
@@ -14,8 +19,9 @@ export default class PostList extends React.Component {
         });
     }
 
-    delete(_id) {
-        Meteor.call('secured.post_remove', _id);
+    navigateToCreatePage() {
+        const {history} = this.props;
+        history.push('/posts/create');
     }
 
     render() {
@@ -30,29 +36,14 @@ export default class PostList extends React.Component {
             <div className="post">
                 {
                     posts.map((post) => {
-                        return (
-                            <div key={post._id}>
-                                <p>Post title: {post.title}</p>
-                                <p>Post Description: {post.description}</p>
-                                <p>{(post.comments)?post.comments.length:'0'} comments, {post.views} views</p>
-                                <button onClick={() => {history.push("/posts/view/" + post._id)}}>See post</button>
-                                {(post.userId === Meteor.userId()) ? 
-                                    (<div>
-                                        <button onClick={() => {
-                                                history.push("/posts/edit/" + post._id)}
-                                            }> Edit post
-                                        </button>
-                                        <button onClick={() => {
-                                                this.delete(post._id)}
-                                            }>Delete post
-                                        </button>
-                                    </div>):undefined
-                                }
-                            </div>
-                        )
+                        return (<PostElement key={post._id} post={post} history={history}/>)
                     })}
-                <button onClick={() => history.push('/posts/create')}>Create a new post</button>
+                <button onClick={this.navigateToCreatePage}>Create a new post</button>
             </div>
         )
     }
+}
+
+PostList.propTypes = {
+    history: PropTypes.object.isRequired
 }
