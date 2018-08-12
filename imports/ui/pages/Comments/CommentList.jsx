@@ -1,5 +1,7 @@
 import React from 'react';
-import {AutoForm, LongTextField, HiddenField} from 'uniforms-unstyled';
+import {Meteor} from 'meteor/meteor';
+import {AutoForm, LongTextField} from 'uniforms-unstyled';
+import PropTypes from 'prop-types';
 import CommentView from './CommentView';
 import FormSchema from './schema';
 
@@ -16,20 +18,20 @@ export default class CommentList extends React.Component {
         this.state = {
             comments: null
         };
-    };
+    }
 
 
     submit = (comment) => {
         comment.postId = this.props.postId;
         Meteor.call('secured.comment_create', comment, (err) => {
             if (err) {
-                return console.log(err);
+                return alert(err);
             }
         });
     };
 
     componentDidMount() {
-        const query = listCommentsQuery.clone({postId:this.props.postId}); 
+        const query = listCommentsQuery.clone({postId:this.props.postId});
         const subscriptionHandle = query.subscribe();
         this.commentsTracker = Tracker.autorun(() => {
             if(subscriptionHandle.ready()) {
@@ -37,7 +39,7 @@ export default class CommentList extends React.Component {
                 this.setState({comments});
             }
         });
-    };
+    }
 
     componentWillUnmount() {
         this.commentsTracker.stop();
@@ -67,5 +69,9 @@ export default class CommentList extends React.Component {
                 }
             </div>
         );
-    };
+    }
+}
+
+CommentList.propTypes = {
+    postId: PropTypes.string.isRequired
 }
