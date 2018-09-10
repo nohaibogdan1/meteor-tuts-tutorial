@@ -1,7 +1,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Posts} from '/imports/db';
 import Security from '/imports/api/security';
-import {listPostsQuery} from '/imports/db/queries';
+import listPostsQuery from '/imports/api/posts/queries/listPosts';
 
 // for testing change Meter.userId() to this.userId
 

@@ -1,6 +1,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Comments, Posts} from '/imports/db';
-import {listCommentsQuery, listPostsQuery} from '/imports/db/queries';
+import listPostsQuery from '/imports/api/posts/queries/listPosts';
+import listCommentsQuery from '/imports/api/comments/queries/listComments';
 import Security from '/imports/api/security';
 
 // for testing change Meteor.userId() to this.userId

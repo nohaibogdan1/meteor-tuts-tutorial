@@ -1,5 +1,5 @@
 import {Meteor} from 'meteor/meteor';
-import {listUsersQuery} from '/imports/db/queries';
+import listUsersQuery from '/imports/api/users/queries/listUsers';
 
 export default function registerUser(data) {
     const user = listUsersQuery.clone({emailAddress:data.email}).fetchOne();

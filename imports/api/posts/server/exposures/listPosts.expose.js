@@ -1,3 +1,3 @@
-import {listPostsQuery} from '/imports/db/queries';
+import listPostsQuery from '/imports/api/posts/queries/listPosts';
 
 listPostsQuery.expose({});

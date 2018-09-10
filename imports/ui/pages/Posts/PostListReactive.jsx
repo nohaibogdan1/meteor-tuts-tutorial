@@ -1,7 +1,7 @@
 import React from 'react';
 import {Tracker} from 'meteor/tracker';
 import PropTypes from 'prop-types';
-import {listPostsQuery} from '/imports/db/queries';
+import listPostsQuery from '/imports/api/posts/queries/listPosts';
 
 import PostElement from './PostElement';
 
