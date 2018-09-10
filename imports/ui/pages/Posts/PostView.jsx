@@ -23,7 +23,6 @@ export default class PostView extends React.Component {
         });
     }
 
-
     render() {
         const {post} = this.state;
         if (!post) {

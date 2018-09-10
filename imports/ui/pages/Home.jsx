@@ -3,7 +3,6 @@ import {Meteor} from 'meteor/meteor';
 import { AutoForm, AutoField } from 'uniforms-unstyled';
 import SimpleSchema from 'simpl-schema';
 
-
 export default class Home extends React.Component {
     constructor() {
         super();
