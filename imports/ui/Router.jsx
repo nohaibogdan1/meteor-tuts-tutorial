@@ -13,8 +13,6 @@ import Login from './pages/Users/Login';
 
 import RoutesEnum from './routes';
 
-
-
 const Router = () =>
     <App>
         <Route exact path={RoutesEnum.HOME} component={Home}/>
