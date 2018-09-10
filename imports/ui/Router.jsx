@@ -11,16 +11,20 @@ import PostView from './pages/Posts/PostView';
 import Register from './pages/Users/Register';
 import Login from './pages/Users/Login';
 
+import RoutesEnum from './routes';
+
+
+
 const Router = () =>
     <App>
-        <Route exact path="/" component={Home}/>
-        <Route exact path="/posts" component={PostList} />
-        <Route exact path="/posts/reactive" component={PostListReactive} />
-        <Route exact path="/posts/create" component={PostCreate} />
-        <Route exact path="/posts/edit/:_id" component={PostEdit} />
-        <Route exact path="/posts/view/:_id" component={PostView} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
+        <Route exact path={RoutesEnum.HOME} component={Home}/>
+        <Route exact path={RoutesEnum.POSTS} component={PostList} />
+        <Route exact path={RoutesEnum.POSTS_REACTIVE} component={PostListReactive} />
+        <Route exact path={RoutesEnum.POSTS_CREATE} component={PostCreate} />
+        <Route exact path={RoutesEnum.POSTS_EDIT} component={PostEdit} />
+        <Route exact path={RoutesEnum.POSTS_VIEW} component={PostView} />
+        <Route exact path={RoutesEnum.REGISTER} component={Register} />
+        <Route exact path={RoutesEnum.LOGIN} component={Login} />
     </App>
 
 
