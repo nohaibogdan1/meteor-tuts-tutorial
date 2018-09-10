@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import listPostsQuery from '/imports/api/posts/queries/listPosts';
 import PostElement from './PostElement';
+import RoutesEnum from '/imports/ui/routes/enums/routes';
 
 export default class PostListReactive extends React.Component {
     constructor(props) {
@@ -31,7 +32,7 @@ export default class PostListReactive extends React.Component {
 
     navigateToCreatePage() {
         const {history} = this.props;
-        history.push('/posts/create/reactive');
+        history.push(RoutesEnum.POSTS_CREATE);
     }
 
     render() {

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {AutoForm, AutoField, ErrorsField} from 'uniforms-unstyled';
 
 import RegisterSchema from './registerSchema';
+import RoutesEnum from '/imports/ui/routes/enums/routes';
 
 export default class Register extends Component {
     constructor() {
@@ -17,7 +18,7 @@ export default class Register extends Component {
                     if (err) {
                         return alert(err.reason);
                     }
-                    this.props.history.push('/posts');
+                    this.props.history.push(RoutesEnum.POSTS_REACTIVE);
                 });
             } else {
                 return alert(err.reason)
