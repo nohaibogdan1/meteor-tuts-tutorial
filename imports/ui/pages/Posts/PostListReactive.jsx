@@ -1,8 +1,8 @@
 import React from 'react';
 import {Tracker} from 'meteor/tracker';
 import PropTypes from 'prop-types';
-import {listPostsQuery} from '/imports/db/queries';
 
+import listPostsQuery from '/imports/api/posts/queries/listPosts';
 import PostElement from './PostElement';
 
 export default class PostListReactive extends React.Component {
@@ -12,7 +12,6 @@ export default class PostListReactive extends React.Component {
             posts: null
         };
         this.navigateToCreatePage = this.navigateToCreatePage.bind(this);
-
     }
 
     componentDidMount() {
@@ -38,11 +37,9 @@ export default class PostListReactive extends React.Component {
     render() {
         const {posts} = this.state;
         const {history} = this.props;
-
         if (!posts) {
             return <div>Loading....</div>
         }
-
         return (
             <div className="post">
                 {

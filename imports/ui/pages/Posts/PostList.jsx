@@ -27,11 +27,9 @@ export default class PostList extends React.Component {
     render() {
         const {posts} = this.state;
         const {history} = this.props;
-
         if (!posts) {
             return <div>Loading....</div>
         }
-
         return (
             <div className="post">
                 {

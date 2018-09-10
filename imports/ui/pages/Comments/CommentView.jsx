@@ -26,9 +26,6 @@ export default class CommentView extends React.Component {
         return undefined;
     }
 
-
-
-
     render() {
         return (
             <div>
