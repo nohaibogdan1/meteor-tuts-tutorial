@@ -7,6 +7,7 @@ import {Tracker} from 'meteor/tracker';
 import CommentView from './CommentView';
 import FormSchema from './schema';
 import listCommentsQuery from '/imports/api/comments/queries/listComments';
+import '/imports/db/links';
 
 export default class CommentList extends React.Component {
     constructor() {
