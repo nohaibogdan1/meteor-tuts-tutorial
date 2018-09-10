@@ -1,4 +1,5 @@
 import {Meteor} from 'meteor/meteor';
+
 import {Comments, Posts} from '/imports/db';
 import listPostsQuery from '/imports/api/posts/queries/listPosts';
 import listCommentsQuery from '/imports/api/comments/queries/listComments';

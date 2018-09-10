@@ -1,2 +1,2 @@
-import './exposures';
+import './listPosts.expose';
 import './securedMethods';

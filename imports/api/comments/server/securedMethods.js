@@ -1,5 +1,6 @@
 import {Meteor} from 'meteor/meteor';
-import {CommentService} from '/imports/api/comments/services/';
+
+import CommentService from '/imports/api/comments/commentService';
 
 Meteor.methods({
     'secured.comment_create' (comment) {

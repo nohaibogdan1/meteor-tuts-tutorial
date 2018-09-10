@@ -1,5 +1,5 @@
 import {Meteor} from 'meteor/meteor'
-import {PostService} from '/imports/api/posts/services';
+import PostService from '/imports/api/posts/postService';
 
 
 Meteor.methods({

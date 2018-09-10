@@ -1,5 +1,5 @@
 import {Meteor} from 'meteor/meteor'
-import {registerUser} from '/imports/api/users/services';
+import registerUser from '/imports/api/users/registerUser';
 
 Meteor.methods({
     'user.register' (data) {
