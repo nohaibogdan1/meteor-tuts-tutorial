@@ -19,7 +19,8 @@ export default class PostService {
         Posts.update({_id, userId: Meteor.userId()}, {
             $set: {
                 title: postData.title,
-                description: postData.description
+                description: postData.description,
+                postType: postData.postType
             }
         });
     };
