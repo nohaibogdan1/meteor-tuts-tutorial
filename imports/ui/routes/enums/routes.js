@@ -1,7 +1,6 @@
 const RoutesEnum = {
     HOME: '/',
-    POSTS: '/posts',
-    POSTS_REACTIVE: '/posts/reactive',
+    POSTS_REACTIVE: '/posts',
     POSTS_CREATE: '/posts/create',
     POSTS_EDIT: '/posts/edit/:_id',
     POSTS_VIEW: '/posts/view/:_id',
