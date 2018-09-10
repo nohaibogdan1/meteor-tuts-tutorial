@@ -8,8 +8,6 @@ export default class PostElement extends React.Component {
         this.navigateToViewPage = this.navigateToViewPage.bind(this);
         this.navigateToEditPage = this.navigateToEditPage.bind(this);
         this.delete = this.delete.bind(this);
-
-        
     }
 
     navigateToViewPage() {

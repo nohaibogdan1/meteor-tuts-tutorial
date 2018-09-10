@@ -11,13 +11,10 @@ export default Comments.createQuery('listComments', {
     },
 
     postId: 1,
-
     posts: {
         userId: 1
     },
-
     text: 1,
-
     users: {
         emailAddress: 1
     }

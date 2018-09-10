@@ -2,6 +2,7 @@ import React from 'react';
 import {Meteor} from 'meteor/meteor';
 import {AutoForm, AutoField, LongTextField, SelectField} from 'uniforms-unstyled';
 import PropTypes from 'prop-types';
+
 import FormSchema from './schema';
 
 export default class PostEdit extends React.Component {
@@ -33,11 +34,9 @@ export default class PostEdit extends React.Component {
 
     render() {
         const {post} = this.state;
-
         if (!post) {
             return <div>Loading....</div>
         }
-
         return (
             <div className="post">
                 <AutoForm onSubmit={this.submit} schema={FormSchema} model={post}>

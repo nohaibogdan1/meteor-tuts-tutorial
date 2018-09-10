@@ -2,8 +2,9 @@ import React from 'react';
 import {Meteor} from 'meteor/meteor';
 import {AutoForm, AutoField, LongTextField, SelectField} from 'uniforms-unstyled';
 import PropTypes from 'prop-types';
-import FormSchema from './schema';
 import moment from 'moment';
+
+import FormSchema from './schema';
 
 export default class PostCreate extends React.Component {
     constructor(props) {
@@ -28,8 +29,6 @@ export default class PostCreate extends React.Component {
     }
 
     render() {
-        
-
         return (
             <div className="post">
                 <AutoForm onSubmit={this.submit} schema={FormSchema}>

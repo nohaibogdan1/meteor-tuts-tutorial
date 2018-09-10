@@ -1,7 +1,6 @@
 import {Meteor} from 'meteor/meteor'
 import PostService from '/imports/api/posts/postService';
 
-
 Meteor.methods({
     'secured.post_create'(post) {
         return PostService.createPost(post);

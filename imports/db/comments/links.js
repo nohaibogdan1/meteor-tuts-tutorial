@@ -7,7 +7,6 @@ Comments.addLinks({
         field: 'postId',
         index: true
     },
-
     'users': {
         type: 'one',
         collection: Meteor.users,

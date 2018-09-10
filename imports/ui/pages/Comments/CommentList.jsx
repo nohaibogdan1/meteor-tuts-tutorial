@@ -2,15 +2,11 @@ import React from 'react';
 import {Meteor} from 'meteor/meteor';
 import {AutoForm, LongTextField} from 'uniforms-unstyled';
 import PropTypes from 'prop-types';
+import {Tracker} from 'meteor/tracker';
+
 import CommentView from './CommentView';
 import FormSchema from './schema';
-
-import {Tracker} from 'meteor/tracker';
 import listCommentsQuery from '/imports/api/comments/queries/listComments';
-
-
-
-
 
 export default class CommentList extends React.Component {
     constructor() {
@@ -19,7 +15,6 @@ export default class CommentList extends React.Component {
             comments: null
         };
     }
-
 
     submit = (comment) => {
         comment.postId = this.props.postId;
@@ -45,13 +40,11 @@ export default class CommentList extends React.Component {
         this.commentsTracker.stop();
     }
  
-
     render() {
         const {comments} = this.state;
         if (!comments) {
             return <div>0 comments</div>;
         }
-
         return (
             <div>
                 <p>{(comments.length)} comments</p>
@@ -59,7 +52,6 @@ export default class CommentList extends React.Component {
                     <LongTextField name="text"/>
                     <button type="submit">Add</button>
                 </AutoForm>
-
                 {
                     comments.map((comment) => {
                         return (

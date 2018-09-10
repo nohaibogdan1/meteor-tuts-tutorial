@@ -3,7 +3,6 @@ import {Posts} from '/imports/db';
 import Security from '/imports/api/security';
 import listPostsQuery from '/imports/api/posts/queries/listPosts';
 
-
 export default class PostService {
     static createPost(post) {
         Security.checkLoggedIn(Meteor.userId());

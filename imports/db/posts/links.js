@@ -1,4 +1,3 @@
-
 import {Posts, Comments } from '/imports/db';
 
 Posts.addLinks({
@@ -7,7 +6,6 @@ Posts.addLinks({
         inversedBy: 'posts',
         autoremove: true
     },
-
     'users': {
         type: 'one',
         collection: Meteor.users,

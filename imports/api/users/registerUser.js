@@ -7,7 +7,6 @@ export default function registerUser(data) {
         throw new Meteor.Error(500, 'email_already_taken',
             'Email already taken');
     }
-
     Accounts.createUser({
         email: data.email,
         password: data.password
