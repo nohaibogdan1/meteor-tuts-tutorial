@@ -16,21 +16,19 @@ export default class PostElement extends React.Component {
     navigateToViewPage() {
         const {post} = this.props;
         const {history} = this.props;
-        history.push(generateRoutes(RoutesEnum.POSTS_VIEW, post._id));
+        history.push(generateRoutes(RoutesEnum.POSTS_VIEW, {_id: post._id}));
     }
 
     navigateToEditPage() {
         const {post} = this.props;
         const {history} = this.props;
-        history.push(generateRoutes(RoutesEnum.POSTS_EDIT, post._id));
+        history.push(generateRoutes(RoutesEnum.POSTS_EDIT, {_id: post._id}));
     }
 
     delete() {
         const {post} = this.props;
         Meteor.call('secured.post_remove', post._id);
     }
-
-
 
     render() {
         const {post} = this.props;
