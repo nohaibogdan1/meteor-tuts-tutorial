@@ -8,15 +8,14 @@ const generateRoutes = (path, params) => {
             paramsNeeded.push(paramOccurances[i].substring(1));
         }
     }
-    if (paramsNeeded.length != 0) {
-        console.log(`these ${paramsNeeded} params are needed`);
-        return;
+    if (paramsNeeded.length) {
+        return console.log(`these params are needed: ${paramsNeeded}`);   
     }
     // replace corresponding params in path
     for (let i = 0; i < paramOccurances.length; i++) {
         path = path.replace(paramOccurances[i], params[paramOccurances[i].substring(1)]);
     }
-    console.log(path);
+    return path;
 }
 
 export default generateRoutes;
