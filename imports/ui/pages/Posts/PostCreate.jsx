@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import FormSchema from './schema';
+import RoutesEnum from '/imports/ui/routes/enums/routes';
 
 export default class PostCreate extends React.Component {
     constructor(props) {
@@ -25,7 +26,7 @@ export default class PostCreate extends React.Component {
 
     navigateToPosts() {
         const {history} = this.props;
-        history.push('/posts');
+        history.push(RoutesEnum.POSTS_REACTIVE);
     }
 
     render() {

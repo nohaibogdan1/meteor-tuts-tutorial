@@ -9,7 +9,7 @@ import PostListReactive from './pages/Posts/PostListReactive';
 import PostView from './pages/Posts/PostView';
 import Register from './pages/Users/Register';
 import Login from './pages/Users/Login';
-import RoutesEnum from './routes';
+import RoutesEnum from './routes/enums/routes';
 
 const Router = () =>
     <App>

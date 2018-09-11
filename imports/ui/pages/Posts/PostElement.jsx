@@ -2,6 +2,9 @@ import React from 'react';
 import {Meteor} from 'meteor/meteor';
 import PropTypes from 'prop-types';
 
+import RoutesEnum from '/imports/ui/routes/enums/routes';
+import generateRoutes from '/imports/ui/routes/methods';
+
 export default class PostElement extends React.Component {
     constructor(props) {
         super(props);
@@ -13,21 +16,19 @@ export default class PostElement extends React.Component {
     navigateToViewPage() {
         const {post} = this.props;
         const {history} = this.props;
-        history.push("/posts/view/" + post._id);
+        history.push(generateRoutes(RoutesEnum.POSTS_VIEW, {_id: post._id}));
     }
 
     navigateToEditPage() {
         const {post} = this.props;
         const {history} = this.props;
-        history.push("/posts/edit/" + post._id);
+        history.push(generateRoutes(RoutesEnum.POSTS_EDIT, {_id: post._id}));
     }
 
     delete() {
         const {post} = this.props;
         Meteor.call('secured.post_remove', post._id);
     }
-
-
 
     render() {
         const {post} = this.props;

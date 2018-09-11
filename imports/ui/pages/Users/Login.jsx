@@ -2,7 +2,9 @@ import React from 'react';
 import {Meteor} from 'meteor/meteor';
 import PropTypes from 'prop-types';
 import {AutoForm, AutoField, ErrorsField} from 'uniforms-unstyled';
+
 import LoginSchema from './loginSchema';
+import RoutesEnum from '/imports/ui/routes/enums/routes';
 
 export default class Login extends React.Component {
     constructor() {
@@ -13,7 +15,7 @@ export default class Login extends React.Component {
         const {email, password} = data;
         Meteor.loginWithPassword(email, password, (err) => {
             if (!err) {
-                return this.props.history.push('/posts');
+                return this.props.history.push(RoutesEnum.POSTS_REACTIVE);
             }
             alert(err.reason);
         });

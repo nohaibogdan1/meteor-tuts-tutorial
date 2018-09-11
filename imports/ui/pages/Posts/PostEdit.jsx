@@ -4,6 +4,7 @@ import {AutoForm, AutoField, LongTextField, SelectField} from 'uniforms-unstyled
 import PropTypes from 'prop-types';
 
 import FormSchema from './schema';
+import RoutesEnum from '/imports/ui/routes/enums/routes';
 
 export default class PostEdit extends React.Component {
     constructor(props) {
@@ -29,7 +30,7 @@ export default class PostEdit extends React.Component {
 
     navigateToPosts() {
         const {history} = this.props;
-        history.push('/posts');
+        history.push(RoutesEnum.POSTS_REACTIVE);
     }
 
     render() {
