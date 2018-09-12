@@ -22,6 +22,9 @@ export default new SimplSchema({
         type: Number,
         defaultValue: 0
     },
+    visibleForEveryone: {
+        type: Boolean
+    },
     title:  {
         type: String
     }
