@@ -20,6 +20,7 @@ export default class PostEdit extends React.Component {
     }
 
     submit = (post) => {
+        console.log(post);
         Meteor.call('secured.post_edit', this.props.match.params._id, post, (err) => {
             if (err) {
                 return alert(err.reason);
@@ -44,6 +45,7 @@ export default class PostEdit extends React.Component {
                     <AutoField name="title"/>
                     <LongTextField name="description"/>
                     <SelectField name="postType" />
+                    <AutoField name="visibleForEveryone"/>
                     <button type='submit'>Edit post</button>
                     <button onClick={this.navigateToPosts}>Back to posts</button>
                 </AutoForm>
