@@ -19,6 +19,5 @@ export default Posts.createQuery('listPosts', {
     users: {
         emailAddress: 1
     },
-    views: 1,
-    visibleForEveryone: 1
+    views: 1
 });
