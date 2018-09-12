@@ -1,6 +1,8 @@
 import SimplSchema from 'simpl-schema';
-import PostTypesEnum from './enums/types';
 import _ from 'underscore';
+
+import PostTypesEnum from './enums/types';
+
 
 export default new SimplSchema({
     createdAt: {
@@ -22,7 +24,7 @@ export default new SimplSchema({
         type: Number,
         defaultValue: 0
     },
-    visibleForEveryone: {
+    isVisibleForEveryone: {
         type: Boolean
     },
     title:  {

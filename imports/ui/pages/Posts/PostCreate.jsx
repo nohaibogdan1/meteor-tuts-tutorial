@@ -36,7 +36,7 @@ export default class PostCreate extends React.Component {
                     <AutoField name="title" />
                     <LongTextField name="description" />
                     <SelectField name="postType"/>
-                    <AutoField name="visibleForEveryone"/>
+                    <AutoField name="isVisibleForEveryone"/>
                     <button type='submit'>Add post</button>
                     <button onClick={this.navigateToPosts}>Back to posts</button>
                 </AutoForm>

@@ -1,4 +1,5 @@
 import SimpleSchema from 'simpl-schema';
+
 import PostTypesEnum from './enums/types';
 
 export default new SimpleSchema({
@@ -13,7 +14,9 @@ export default new SimpleSchema({
     title: {
         type: String
     },
-    visibleForEveryone: {
-        type: Boolean
+    isVisibleForEveryone: {
+        type: Boolean,
+        defaultValue: true
     }
 });
+
