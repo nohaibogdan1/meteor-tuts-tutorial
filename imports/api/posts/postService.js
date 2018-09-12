@@ -17,11 +17,7 @@ export default class PostService {
 
     static editPost(_id, postData) {
         Posts.update({_id, userId: Meteor.userId()}, {
-            $set: {
-                title: postData.title,
-                description: postData.description,
-                postType: postData.postType
-            }
+            $set: {...postData}
         });
     };
 
