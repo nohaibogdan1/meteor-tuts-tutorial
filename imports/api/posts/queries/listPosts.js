@@ -5,6 +5,9 @@ export default Posts.createQuery('listPosts', {
         if (params._id){
             filters._id = params._id;
         }
+        if (params.visibleForEveryone){
+            filters.visibleForEveryone = params.visibleForEveryone;
+        }
     },
     comments: {
         _id: 1
@@ -16,5 +19,6 @@ export default Posts.createQuery('listPosts', {
     users: {
         emailAddress: 1
     },
-    views: 1
+    views: 1,
+    visibleForEveryone: 1
 });
