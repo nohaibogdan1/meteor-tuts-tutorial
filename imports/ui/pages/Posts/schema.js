@@ -12,5 +12,8 @@ export default new SimpleSchema({
     },
     title: {
         type: String
+    },
+    visibleForEveryone: {
+        type: Boolean
     }
 });
