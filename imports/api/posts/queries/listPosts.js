@@ -5,8 +5,8 @@ export default Posts.createQuery('listPosts', {
         if (params._id){
             filters._id = params._id;
         }
-        if (params.visibleForEveryone){
-            filters.visibleForEveryone = params.visibleForEveryone;
+        if (params.isVisibleForEveryone){
+            filters.isVisibleForEveryone = params.isVisibleForEveryone;
         }
     },
     comments: {
