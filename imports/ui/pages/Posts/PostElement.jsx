@@ -30,14 +30,13 @@ export default class PostElement extends React.Component {
                 return console.log(error);
             }
             this.setState({reactionsNumber: reactions.length});
-            console.log('state.reactionsNumber', this.state.reactionsNumber);
         });
 
         Meteor.call('secured.reaction_get_current_user', {postId: this.props.post._id, userId: Meteor.userId()}, (error, reaction) => {
             if (error) {
                 return console.log(error);
             }
-            if (typeof reaction === 'undefined'){
+            if (typeof reaction === 'undefined') {
                 return;
             }
             this.setState({reactionCurrentUser: reaction.text});
@@ -85,17 +84,14 @@ export default class PostElement extends React.Component {
                         <button onClick={this.delete}>Delete post</button>
                     </div>):undefined
                 }
-
-                <p>reaction{this.state.reactionCurrentUser}</p>
-
+                <p>{this.state.reactionCurrentUser}</p>
+                <p>{this.state.reactionsNumber?`${this.state.reactionsNumber} reactions`:''}</p>
                 <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.LIKE}/>
                 <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.LOVE}/>
                 <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.HAPPY}/>
                 <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.WOW}/>
                 <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.SAD}/>
                 <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.ANGRY}/>
-
-                
             </div>
         );
     }
