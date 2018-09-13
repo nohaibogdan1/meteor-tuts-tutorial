@@ -3,7 +3,6 @@ import _ from 'underscore';
 
 import PostTypesEnum from './enums/types';
 
-
 export default new SimplSchema({
     createdAt: {
         type: Date,

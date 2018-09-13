@@ -23,4 +23,4 @@ Meteor.users.addReducers({
             return `${emails[0].address}`;
         }
     }
-})
+});

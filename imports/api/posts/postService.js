@@ -22,8 +22,7 @@ export default class PostService {
     };
 
     static removePost(_id) {
-        Posts.remove({_id, userId: Meteor.userId()});
-        
+        Posts.remove({_id, userId: Meteor.userId()});  
     };
 
     static getPost(_id) {
@@ -36,8 +35,5 @@ export default class PostService {
                 views: 1
             }
         });
-    }
-
-
- 
+    };
 } 

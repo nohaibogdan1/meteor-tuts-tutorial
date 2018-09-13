@@ -18,9 +18,8 @@ export default class Home extends React.Component {
             </div>
         )
     }
-}
+};
 
 const schema = new SimpleSchema({
     myValue: String
 });
-
