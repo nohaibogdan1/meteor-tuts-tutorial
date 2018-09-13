@@ -1,7 +1,6 @@
 import SimplSchema from 'simpl-schema';
-import _ from 'underscore';
 
-import PostTypesEnum from './enums/types';
+import {types} from './enums/types';
 
 export default new SimplSchema({
     createdAt: {
@@ -13,8 +12,8 @@ export default new SimplSchema({
     },
     postType: {
         type: String,
-        allowedValues: _.values(PostTypesEnum),
-        defaultValue: _.values(PostTypesEnum)[0]
+        allowedValues: types,
+        defaultValue: types[0]
     },
     userId: {
         type: String

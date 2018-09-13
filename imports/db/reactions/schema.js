@@ -1,7 +1,7 @@
 import SimpleSchema from 'simpl-schema';
-import _ from 'underscore';
 
-import PostReactionsEnum from './reactions';
+
+import {reactions} from './reactions.enum';
 
 export default new SimpleSchema({
     postId: {
@@ -9,7 +9,7 @@ export default new SimpleSchema({
     },
     text: {
         type: String,
-        allowedValues: _.values(PostReactionsEnum)
+        allowedValues: reactions
     },
     userId: {
         type: String
