@@ -8,6 +8,9 @@ export default Posts.createQuery('listPosts', {
         if (params.isVisibleForEveryone){
             filters.isVisibleForEveryone = params.isVisibleForEveryone;
         }
+        if (params.createdAt) {
+            filters.createdAt = params.createdAt;
+        }
     },
     comments: {
         _id: 1
@@ -19,5 +22,6 @@ export default Posts.createQuery('listPosts', {
     users: {
         emailAddress: 1
     },
-    views: 1
+    views: 1,
+    createdAt: 1
 });
