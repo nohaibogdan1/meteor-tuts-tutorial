@@ -2,13 +2,10 @@ import React from 'react';
 import {Meteor} from 'meteor/meteor';
 import PropTypes from 'prop-types';
 
-
 import RoutesEnum from '/imports/ui/routes/enums/routes';
 import generateRoutes from '/imports/ui/routes/methods';
-
 import ReactionButton from './ReactionButton';
 import {reactions} from '/imports/db/reactions/reactions.enum';
-
 
 export default class PostElement extends React.Component {
     constructor(props) {

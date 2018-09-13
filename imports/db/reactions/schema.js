@@ -1,6 +1,5 @@
 import SimpleSchema from 'simpl-schema';
 
-
 import {reactions} from './reactions.enum';
 
 export default new SimpleSchema({
