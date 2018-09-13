@@ -7,21 +7,21 @@ import RoutesEnum from '/imports/ui/routes/enums/routes';
 import generateRoutes from '/imports/ui/routes/methods';
 
 import ReactionButton from './ReactionButton';
-import ReactionsEnum from '/imports/db/reactions/reactions.enum';
+import {reactions} from '/imports/db/reactions/reactions.enum';
 
 
 export default class PostElement extends React.Component {
     constructor(props) {
         super(props);
-        this.navigateToViewPage = this.navigateToViewPage.bind(this);
-        this.navigateToEditPage = this.navigateToEditPage.bind(this);
-        this.delete = this.delete.bind(this);
-        this.addReaction = this.addReaction.bind(this);
-
         this.state = {
             reactionsNumber: null,
             reactionCurrentUser: null
         }
+        this.navigateToViewPage = this.navigateToViewPage.bind(this);
+        this.navigateToEditPage = this.navigateToEditPage.bind(this);
+        this.delete = this.delete.bind(this);
+        this.addReaction = this.addReaction.bind(this);
+        this.renderReactionButtons = this.renderReactionButtons.bind(this);
     }
 
     componentDidMount(){
@@ -68,6 +68,14 @@ export default class PostElement extends React.Component {
         Meteor.call('secured.reaction_update', reaction);
     }
 
+    renderReactionButtons() {
+        return reactions.map((reaction) => {
+            return (
+                <ReactionButton key={reaction} addReaction={this.addReaction} text={reaction}/>
+            )
+        });
+    }
+
     render() {
         const {post} = this.props;
         return(
@@ -85,12 +93,7 @@ export default class PostElement extends React.Component {
                 }
                 <p>{this.state.reactionCurrentUser}</p>
                 <p>{this.state.reactionsNumber?`${this.state.reactionsNumber} reactions`:''}</p>
-                <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.LIKE}/>
-                <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.LOVE}/>
-                <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.HAPPY}/>
-                <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.WOW}/>
-                <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.SAD}/>
-                <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.ANGRY}/>
+                {this.renderReactionButtons()}
             </div>
         );
     }
