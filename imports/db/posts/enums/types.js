@@ -8,5 +8,6 @@ const PostTypesEnum = {
     PROJECT_MANAGEMENT: 'project management',
     OTHERS: 'others'
 };
+const types = _.values(PostTypesEnum);
 
-export const types = _.values(PostTypesEnum);
+export {types};

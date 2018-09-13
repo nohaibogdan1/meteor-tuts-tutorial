@@ -8,5 +8,6 @@ const PostReactionsEnum = {
     SAD: 'sad',
     ANGRY: 'angry'
 }
+const reactions = _.values(PostReactionsEnum);
 
-export const reactions = _.values(PostReactionsEnum);
+export {reactions};
