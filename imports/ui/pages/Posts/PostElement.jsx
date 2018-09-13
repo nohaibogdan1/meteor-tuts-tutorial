@@ -2,8 +2,13 @@ import React from 'react';
 import {Meteor} from 'meteor/meteor';
 import PropTypes from 'prop-types';
 
+
 import RoutesEnum from '/imports/ui/routes/enums/routes';
 import generateRoutes from '/imports/ui/routes/methods';
+
+import ReactionButton from './ReactionButton';
+import ReactionsEnum from '/imports/db/reactions/reactions';
+
 
 export default class PostElement extends React.Component {
     constructor(props) {
@@ -11,7 +16,10 @@ export default class PostElement extends React.Component {
         this.navigateToViewPage = this.navigateToViewPage.bind(this);
         this.navigateToEditPage = this.navigateToEditPage.bind(this);
         this.delete = this.delete.bind(this);
+        this.addReaction = this.addReaction.bind(this);
     }
+
+
 
     navigateToViewPage() {
         const {post} = this.props;
@@ -30,6 +38,18 @@ export default class PostElement extends React.Component {
         Meteor.call('secured.post_remove', post._id);
     }
 
+    addReaction(a) {
+        console.log(a);
+        console.log(this);
+        reaction = {
+            postId: this.props.post._id, 
+            text: 'sad', 
+            userId: Meteor.userId()
+        }
+
+        Meteor.call('secured.reaction_update', reaction);
+    }
+
     render() {
         const {post} = this.props;
         return(
@@ -45,6 +65,7 @@ export default class PostElement extends React.Component {
                         <button onClick={this.delete}>Delete post</button>
                     </div>):undefined
                 }
+                
             </div>
         );
     }
