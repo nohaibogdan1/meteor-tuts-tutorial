@@ -13,6 +13,7 @@ export default class PostListReactive extends React.Component {
             posts: null
         };
         this.navigateToCreatePage = this.navigateToCreatePage.bind(this);
+        this.renderPosts = this.renderPosts.bind(this);
     }
 
     componentDidMount() {
@@ -21,7 +22,7 @@ export default class PostListReactive extends React.Component {
         this.postsTracker = Tracker.autorun(() => {
             if (subscriptionHandle.ready()) {
                 const posts = query.fetch();
-                this.setState({posts});
+                // this.setState({posts});
             }
         });
     }
@@ -35,26 +36,28 @@ export default class PostListReactive extends React.Component {
         history.push(RoutesEnum.POSTS_CREATE);
     }
 
+    renderPosts() {
+        const {history} = this.props;
+        return this.state.posts.map((post) => {
+            return (
+                <PostElement key={post._id} post={post} history={history}/>
+            )
+        })
+    }
+
     render() {
         const {posts} = this.state;
-        const {history} = this.props;
         if (!posts) {
             return <div>Loading....</div>
         }
         return (
             <div className="post">
-                {
-                    posts.map((post) => {
-                        return (
-                            <PostElement key={post._id} post={post} history={history}/>
-                        )
-                    })}
+                {this.renderPosts()}
                 <button onClick={this.navigateToCreatePage}>Create a new post</button>
             </div>
         )
     }
 }
-
 
 PostListReactive.propTypes = {
     history: PropTypes.object.isRequired
