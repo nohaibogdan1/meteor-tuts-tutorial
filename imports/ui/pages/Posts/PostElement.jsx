@@ -65,7 +65,12 @@ export default class PostElement extends React.Component {
                         <button onClick={this.delete}>Delete post</button>
                     </div>):undefined
                 }
-                
+                <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.LIKE}/>
+                <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.LOVE}/>
+                <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.HAPPY}/>
+                <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.WOW}/>
+                <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.SAD}/>
+                <ReactionButton addReaction={this.addReaction} text={ReactionsEnum.ANGRY}/>
             </div>
         );
     }
