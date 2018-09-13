@@ -5,24 +5,37 @@ import listPostsQuery from '/imports/api/posts/queries/listPosts';
 
 export default class PostService {
     static createPost(post) {
-        Security.checkLoggedIn(Meteor.userId());
-        post.userId = Meteor.userId();
+        Security.checkLoggedIn(post.userId);
         return Posts.insert(post);
     };
 
-    static listPosts() {
-        const posts = listPostsQuery.clone({}).fetch();
+    static listPostsForRegisteredUsers() {
+        return listPostsQuery.clone({}).fetch();
+    };
+
+    static listPostsForUnregisteredUsers() {
+        return listPostsQuery.clone({isVisibleForEveryone: true}).fetch();
+    };
+
+    static listPosts(userId) {
+        let posts = [];
+        try{
+            Security.checkLoggedIn(userId);
+            posts = this.listPostsForRegisteredUsers();
+        } catch(error) {
+            posts = this.listPostsForUnregisteredUsers();
+        }
         return posts;
     };
 
-    static editPost(_id, postData) {
-        Posts.update({_id, userId: Meteor.userId()}, {
-            $set: {...postData}
+    static editPost({_id, userId, post}) {
+        Posts.update({_id, userId }, {
+            $set: {...post}
         });
     };
 
-    static removePost(_id) {
-        Posts.remove({_id, userId: Meteor.userId()});  
+    static removePost({_id, userId}) {
+        Posts.remove({_id, userId});  
     };
 
     static getPost(_id) {
