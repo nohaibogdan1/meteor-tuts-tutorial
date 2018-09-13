@@ -7,7 +7,7 @@ import RoutesEnum from '/imports/ui/routes/enums/routes';
 import generateRoutes from '/imports/ui/routes/methods';
 
 import ReactionButton from './ReactionButton';
-import ReactionsEnum from '/imports/db/reactions/reactions';
+import ReactionsEnum from '/imports/db/reactions/reactions.enum';
 
 
 export default class PostElement extends React.Component {
@@ -32,7 +32,7 @@ export default class PostElement extends React.Component {
             this.setState({reactionsNumber: reactions.length});
         });
 
-        Meteor.call('secured.reaction_get_current_user', {postId: this.props.post._id, userId: Meteor.userId()}, (error, reaction) => {
+        Meteor.call('secured.reaction_get_current_user', this.props.post._id, (error, reaction) => {
             if (error) {
                 return console.log(error);
             }
@@ -63,8 +63,7 @@ export default class PostElement extends React.Component {
     addReaction(text) {
         reaction = {
             postId: this.props.post._id, 
-            text, 
-            userId: Meteor.userId()
+            text
         }
         Meteor.call('secured.reaction_update', reaction);
     }
