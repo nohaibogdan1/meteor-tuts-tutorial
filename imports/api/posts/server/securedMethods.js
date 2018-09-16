@@ -6,8 +6,8 @@ Meteor.methods({
         return PostService.createPost({...post, userId: this.userId});
     },
 
-    'secured.post_list' (userId) {
-        return PostService.listPosts(userId);
+    'secured.post_list' () {
+        return PostService.listPosts({userId: this.userId});
     },
 
     'secured.post_edit' ({_id, post}) {

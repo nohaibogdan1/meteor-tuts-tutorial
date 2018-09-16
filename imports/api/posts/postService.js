@@ -17,7 +17,7 @@ export default class PostService {
         return listPostsQuery.clone({isVisibleForEveryone: true}).fetch();
     };
 
-    static listPosts(userId) {
+    static listPosts({userId}) {
         let posts = [];
         try{
             Security.checkLoggedIn(userId);
