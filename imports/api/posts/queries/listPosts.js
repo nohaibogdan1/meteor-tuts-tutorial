@@ -5,7 +5,15 @@ export default Posts.createQuery('listPosts', {
         if (params._id){
             filters._id = params._id;
         }
+        if (params.isVisibleForEveryone){
+            filters.isVisibleForEveryone = params.isVisibleForEveryone;
+        }
+        if (params.createdAt) {
+            filters.createdAt = params.createdAt;
+        }
     },
+    $options: { sort: {createdAt: -1}},
+    $paginate: true,
     comments: {
         _id: 1
     },
@@ -16,5 +24,6 @@ export default Posts.createQuery('listPosts', {
     users: {
         emailAddress: 1
     },
-    views: 1
+    views: 1,
+    createdAt: 1
 });

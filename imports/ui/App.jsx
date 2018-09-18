@@ -10,4 +10,4 @@ export default App;
 
 App.propTypes = {
     children: PropTypes.array.isRequired
-}
+};

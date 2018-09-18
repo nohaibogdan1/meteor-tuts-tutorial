@@ -1,6 +1,6 @@
 import SimplSchema from 'simpl-schema';
-import PostTypesEnum from './enums/types';
-import _ from 'underscore';
+
+import {types, PostTypesEnum} from './enums/types';
 
 export default new SimplSchema({
     createdAt: {
@@ -12,8 +12,8 @@ export default new SimplSchema({
     },
     postType: {
         type: String,
-        allowedValues: _.values(PostTypesEnum),
-        defaultValue: _.values(PostTypesEnum)[0]
+        allowedValues: types,
+        defaultValue: PostTypesEnum.NATURE
     },
     userId: {
         type: String
@@ -21,6 +21,9 @@ export default new SimplSchema({
     views: {
         type: Number,
         defaultValue: 0
+    },
+    isVisibleForEveryone: {
+        type: Boolean
     },
     title:  {
         type: String

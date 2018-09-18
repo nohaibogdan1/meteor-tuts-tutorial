@@ -14,6 +14,7 @@ export default class CommentList extends React.Component {
         this.state = {
             comments: null
         };
+        this.renderComments = this.renderComments.bind(this);
     }
 
     submit = (comment) => {
@@ -40,6 +41,14 @@ export default class CommentList extends React.Component {
         this.commentsTracker.stop();
     }
  
+    renderComments() {
+        return this.state.comments.map((comment) => {
+            return (
+                <CommentView key={comment._id} comment={comment}/>
+            );
+        });
+    }
+
     render() {
         const {comments} = this.state;
         if (!comments) {
@@ -52,13 +61,7 @@ export default class CommentList extends React.Component {
                     <LongTextField name="text"/>
                     <button type="submit">Add</button>
                 </AutoForm>
-                {
-                    comments.map((comment) => {
-                        return (
-                            <CommentView key={comment._id} comment={comment}/>
-                        );
-                    })
-                }
+                {this.renderComments()};
             </div>
         );
     }

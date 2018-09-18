@@ -14,5 +14,3 @@ Comments.addLinks({
         index: true
     }
 });
-
-
