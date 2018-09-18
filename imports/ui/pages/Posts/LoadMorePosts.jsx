@@ -2,13 +2,9 @@ import React from 'react';
 
 import listPostsQuery from '/imports/api/posts/queries/listPosts';
 
-export default class LoadMorePosts extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
+export default function LoadMorePosts(props) {
     loadPosts = () => {
-        const {limit, posts} = this.props;
+        const {limit, posts, getOldPosts} = props;
         const postsIds = posts.map((post) => {
             return post._id;
         });
@@ -16,15 +12,13 @@ export default class LoadMorePosts extends React.Component {
             if (err) {
                 return console.log(err);
             }
-            this.props.getOldPosts(posts);
+            getOldPosts(posts);
         });
     }
 
-    render(){
-        return (
-            <div>
-                <button onClick={this.loadPosts}>Load old posts</button>   
-            </div>
-        )
-    }
+    return (
+        <div>
+            <button onClick={loadPosts}>Load old posts</button>   
+        </div>
+    )
 }
