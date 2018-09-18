@@ -15,8 +15,7 @@ export default class LoadMorePosts extends React.Component {
     }
 
     loadPosts = () => {
-        const limit = 2;
-        console.log('state.loadedPostsIds: ', this.state.loadedPostsIds);
+        const {limit} = this.props;
         listPostsQuery.clone({_id: {"$nin": this.state.loadedPostsIds}, limit}).fetch((err, posts) => {
             if (err) {
                 return console.log(err);
