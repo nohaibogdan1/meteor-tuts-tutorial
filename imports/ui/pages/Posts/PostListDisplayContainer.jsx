@@ -10,7 +10,7 @@ export default PostListDisplayContainer = withTracker((props) => {
     if (subscriptionHandle.ready()) {
         lastPosts = query.fetch();
         if (lastPosts.length){
-            props.setPosts([...props.posts, ...lastPosts],lastPosts[lastPosts.length-1].createdAt);
+            props.setPosts(lastPosts);
         }
     }
 
