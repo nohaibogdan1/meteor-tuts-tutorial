@@ -10,12 +10,18 @@ export default class PostList extends React.Component {
         this.state = {
             loading: true,
             posts: [],
-            lastDate: null
+            lastDate: null,
+            page: 1, 
+            numberOfLastPosts: 0
         }
     }
 
-    setPosts = (posts, lastDate) => {
-        this.setState({posts, lastDate});
+    setPosts = (lastPosts) => {
+        this.setState((prevState) => ({
+            posts: [...lastPosts, ...prevState.posts],
+            lastDate: lastPosts[0].createdAt,
+            numberOfLastPosts: lastPosts.length
+        }));
     }
 
     navigateToCreatePage = () => {
@@ -24,11 +30,32 @@ export default class PostList extends React.Component {
     }
 
     componentDidMount() {
-        listPostsQuery.clone().fetch((err, posts) => {
+        const limit = 10;
+        listPostsQuery.clone({limit}).fetch((err, posts) => {
             if (err) {
                 return console.log(err);
             }
-            this.setState({posts, loading: false, lastDate: posts[posts.length-1].createdAt});
+            this.setState((prevState) => ({
+                posts,
+                loading: false,
+                lastDate: posts[0].createdAt,
+                page: prevState.page + 1
+            }));
+        });
+    }
+
+    loadPosts = () => {
+        const limit = 10;
+        const {page, numberOfLastPosts} = this.state;
+        skip = (page - 1) * limit + numberOfLastPosts;
+        listPostsQuery.clone({limit, skip}).fetch((err, posts) => {
+            if (err) {
+                return console.log(err);
+            }
+            this.setState((prevState) => ({
+                posts: [...prevState.posts, ...posts],
+                page: prevState.page + 1
+            }));
         });
     }
 
@@ -40,6 +67,7 @@ export default class PostList extends React.Component {
         return (
             <div>
                 <PostListDisplayContainer lastDate={lastDate} posts={posts} history={this.props.history} setPosts={this.setPosts}/>
+                <button onClick={this.loadPosts}>Load more</button>
                 <button onClick={this.navigateToCreatePage}>Create a new post</button>
             </div>
         )
