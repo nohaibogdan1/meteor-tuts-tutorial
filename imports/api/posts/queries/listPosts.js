@@ -12,6 +12,8 @@ export default Posts.createQuery('listPosts', {
             filters.createdAt = params.createdAt;
         }
     },
+    $options: { sort: {createdAt: -1}},
+    $paginate: true,
     comments: {
         _id: 1
     },
