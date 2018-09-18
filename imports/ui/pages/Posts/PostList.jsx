@@ -11,17 +11,14 @@ export default class PostList extends React.Component {
         this.state = {
             loading: true,
             posts: [],
-            lastDate: null,
-            page: 1, 
-            numberOfLastPosts: 0
+            lastDate: null
         }
     }
 
     setPosts = (lastPosts) => {
         this.setState((prevState) => ({
             posts: [...lastPosts, ...prevState.posts],
-            lastDate: lastPosts[0].createdAt,
-            numberOfLastPosts: lastPosts.length
+            lastDate: lastPosts[0].createdAt
         }));
     }
 
@@ -36,33 +33,19 @@ export default class PostList extends React.Component {
             if (err) {
                 return console.log(err);
             }
-            this.setState((prevState) => ({
+            this.setState({
                 posts,
                 loading: false,
-                lastDate: posts[0].createdAt,
-                page: prevState.page + 1
-            }));
+                lastDate: posts[0].createdAt
+            });
         });
     }
 
-    loadPosts = () => {
-        // const limit = 10;
-        // const {page, numberOfLastPosts} = this.state;
-        // skip = (page - 1) * limit + numberOfLastPosts;
-        // listPostsQuery.clone({limit, skip}).fetch((err, posts) => {
-        //     if (err) {
-        //         return console.log(err);
-        //     }
-        //     this.setState((prevState) => ({
-        //         posts: [...prevState.posts, ...posts],
-        //         page: prevState.page + 1
-        //     }));
-        // });
-    }
-
-
     getOldPosts = (oldPosts) => {
-        console.log('oldPosts: ', oldPosts);
+        this.setState((prevState) => ({
+            posts: [...prevState.posts, ...oldPosts]
+        }));
+
     }
 
     render() {
@@ -73,9 +56,7 @@ export default class PostList extends React.Component {
         return (
             <div>
                 <PostListDisplayContainer lastDate={lastDate} posts={posts} history={this.props.history} setPosts={this.setPosts}/>
-                {/* <button onClick={this.loadPosts}>Load more</button> */}
-                <LoadMorePosts getOldPosts={this.getOldPosts} posts={posts}/>
-
+                <LoadMorePosts getOldPosts={this.getOldPosts} posts={posts} limit={2}/>
                 <button onClick={this.navigateToCreatePage}>Create a new post</button>
             </div>
         )
