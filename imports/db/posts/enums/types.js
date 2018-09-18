@@ -10,4 +10,4 @@ const PostTypesEnum = {
 };
 const types = _.values(PostTypesEnum);
 
-export {types};
+export {types, PostTypesEnum};

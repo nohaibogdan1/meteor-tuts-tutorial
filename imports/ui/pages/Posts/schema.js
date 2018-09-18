@@ -1,6 +1,6 @@
 import SimpleSchema from 'simpl-schema';
 
-import {types} from '/imports/db/posts/enums/types';
+import {types, PostTypesEnum } from '/imports/db/posts/enums/types';
 
 export default new SimpleSchema({
     description: {
@@ -9,7 +9,7 @@ export default new SimpleSchema({
     postType: {
         type: String,
         allowedValues: types,
-        defaultValue: types[0]
+        defaultValue: PostTypesEnum.NATURE
     },
     title: {
         type: String
