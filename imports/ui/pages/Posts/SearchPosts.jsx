@@ -1,8 +1,6 @@
 import React from 'react';
 import _ from 'underscore';
 
-import listPostsQuery from '/imports/api/posts/queries/listPosts';
-
 export default class SearchPosts extends React.Component {
     constructor(props) {
         super(props);
@@ -24,7 +22,7 @@ export default class SearchPosts extends React.Component {
     render() {
         return (
             <div>
-                <input type="text" value={this.state.searchText} onChange={this.changeSearchText}></input>
+                <input type="text" value={this.state.searchText||this.props.searchText} onChange={this.changeSearchText}></input>
             </div>
         );
     }

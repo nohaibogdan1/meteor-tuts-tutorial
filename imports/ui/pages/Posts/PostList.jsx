@@ -83,7 +83,6 @@ export default class PostList extends React.Component {
     }   
 
     render() {
-        
         const {category ,loading , posts, lastDate, searchText} = this.state;
         if (loading) {
             this.loadFirstPosts();
@@ -91,7 +90,7 @@ export default class PostList extends React.Component {
         }
         return (
             <div>
-                <SearchPosts changeSearchText={this.changeSearchText}/>
+                <SearchPosts changeSearchText={this.changeSearchText} searchText={searchText}/>
                 {this.showCategoryButtons()}
                 <PostListDisplayContainer postType={category} lastDate={lastDate} posts={posts} 
                     history={this.props.history} setPosts={this.setPosts}
