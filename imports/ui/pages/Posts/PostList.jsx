@@ -41,6 +41,7 @@ export default class PostList extends React.Component {
         if (!category || category === 'all'){
             filter = {limit};
         }
+        this.setState({posts: []});
         listPostsQuery.clone(filter).fetch((err, posts) => {
             if (err) {
                 return console.log(err);
@@ -82,7 +83,7 @@ export default class PostList extends React.Component {
         return (
             <div>
                 {this.showCategoryButtons()}
-                <PostListDisplayContainer category={this.state.category} lastDate={lastDate} posts={posts} history={this.props.history} setPosts={this.setPosts}/>
+                <PostListDisplayContainer postType={this.state.category} lastDate={lastDate} posts={posts} history={this.props.history} setPosts={this.setPosts}/>
                 {/* <LoadMorePosts getOldPosts={this.getOldPosts} posts={posts} limit={2}/> */}
                 <button onClick={this.navigateToCreatePage}>Create a new post</button>
             </div>
