@@ -13,32 +13,14 @@ export default class SearchPosts extends React.Component {
 
     changeSearchedText = (e) => {
         const searchedText = e.target.value;
-        this.searchPosts(searchedText);
+        this.searchPosts();
         this.setState({searchedText});
     }
 
-
-    getSearchedPosts = () => {
-        const filter = { title: {"$regex": `${this.state.searchedText}`}};
-        console.log('getSearchedPosts filter', filter);
-        listPostsQuery.clone(filter).fetch((err, posts) => {
-            if (err) {
-                return console.log(err);
-            }
-            console.log(posts);
-        });
-    }
-
-
-    searchPosts =  _.debounce((searchedText) => { 
-        console.log('debounce: ', searchedText);
-
-
-        this.getSearchedPosts();
-
+    searchPosts =  _.debounce(() => { 
+        this.props.changeSearchedText(this.state.searchedText);
     }, 2000);
         
-
     render() {
         return (
             <div>
