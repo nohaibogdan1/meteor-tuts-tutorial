@@ -18,6 +18,8 @@ export default class PostList extends React.Component {
         }
     }
 
+    limit = 2;
+
     setPosts = (lastPosts) => {
         this.setState((prevState) => ({
             posts: [...lastPosts, ...prevState.posts],
@@ -36,10 +38,9 @@ export default class PostList extends React.Component {
 
     loadFirstPosts = (category) => {
         this.setState({category});
-        const limit = 2;
-        let filter = {limit, postType: category};
+        let filter = {limit: this.limit, postType: category};
         if (!category || category === 'all'){
-            filter = {limit};
+            filter = {limit: this.limit};
         }
         this.setState({posts: []});
         listPostsQuery.clone(filter).fetch((err, posts) => {
@@ -76,15 +77,15 @@ export default class PostList extends React.Component {
     }   
 
     render() {
-        const {loading, posts, lastDate} = this.state;
+        const {category ,loading , posts, lastDate} = this.state;
         if (loading) {
             return <div>...loading</div>
         }
         return (
             <div>
                 {this.showCategoryButtons()}
-                <PostListDisplayContainer postType={this.state.category} lastDate={lastDate} posts={posts} history={this.props.history} setPosts={this.setPosts}/>
-                {/* <LoadMorePosts getOldPosts={this.getOldPosts} posts={posts} limit={2}/> */}
+                <PostListDisplayContainer postType={category} lastDate={lastDate} posts={posts} history={this.props.history} setPosts={this.setPosts}/>
+                <LoadMorePosts postType={category} getOldPosts={this.getOldPosts} posts={posts} limit={this.limit}/>
                 <button onClick={this.navigateToCreatePage}>Create a new post</button>
             </div>
         )
