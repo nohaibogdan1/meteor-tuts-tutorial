@@ -31,16 +31,27 @@ export default class PostList extends React.Component {
     }
 
     componentDidMount() {
+        this.loadFirstPosts();
+    }
+
+    loadFirstPosts = (category) => {
+        this.setState({category});
         const limit = 2;
-        listPostsQuery.clone({postType: this.state.category, limit}).fetch((err, posts) => {
+        let filter = {limit, postType: category};
+        if (!category || category === 'all'){
+            filter = {limit};
+        }
+        listPostsQuery.clone(filter).fetch((err, posts) => {
             if (err) {
                 return console.log(err);
             }
-            this.setState({
-                posts,
-                loading: false,
-                lastDate: posts[0].createdAt
-            });
+            if (posts.length) {
+                this.setState({
+                    posts,
+                    loading: false,
+                    lastDate: posts[0].createdAt
+                });
+            }
         });
     }
 
@@ -48,16 +59,15 @@ export default class PostList extends React.Component {
         this.setState((prevState) => ({
             posts: [...prevState.posts, ...oldPosts]
         }));
-
     }
 
     changeCategory = (category) => {
-        console.log('PostList category: ', category);
-        this.setState({category});
+        this.loadFirstPosts(category);
     }
 
     showCategoryButtons = () => {
-        return types.map((category) => {
+        const categories = [...types, 'all'];
+        return categories.map((category) => {
                 return (
                     <CategoryButton key={category} category={category} changeCategory={this.changeCategory}/>
                 )
@@ -72,8 +82,8 @@ export default class PostList extends React.Component {
         return (
             <div>
                 {this.showCategoryButtons()}
-                <PostListDisplayContainer lastDate={lastDate} posts={posts} history={this.props.history} setPosts={this.setPosts}/>
-                <LoadMorePosts getOldPosts={this.getOldPosts} posts={posts} limit={2}/>
+                <PostListDisplayContainer category={this.state.category} lastDate={lastDate} posts={posts} history={this.props.history} setPosts={this.setPosts}/>
+                {/* <LoadMorePosts getOldPosts={this.getOldPosts} posts={posts} limit={2}/> */}
                 <button onClick={this.navigateToCreatePage}>Create a new post</button>
             </div>
         )
