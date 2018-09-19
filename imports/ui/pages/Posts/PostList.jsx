@@ -89,14 +89,14 @@ export default class PostList extends React.Component {
             return <div>...loading</div>
         }
         return (
-            <div>
+            <div className="container" style={{marginTop: "20px"}}>
                 <SearchPosts changeSearchText={this.changeSearchText} searchText={searchText}/>
-                {this.showCategoryButtons()}
+                <div className="nav nav-pills nav-fill btn-group" style={{marginTop: "20px"}}>{this.showCategoryButtons()}</div>
                 <PostListDisplayContainer postType={category} lastDate={lastDate} posts={posts} 
                     history={this.props.history} setPosts={this.setPosts}
                     searchText={searchText}/>
                 <LoadMorePosts postType={category} getOldPosts={this.getOldPosts} posts={posts} limit={this.limit} searchText={searchText}/>
-                <button onClick={this.navigateToCreatePage}>Create a new post</button>
+                <button className="btn btn-outline-primary" style={{marginTop: '20px'}} onClick={this.navigateToCreatePage}>Create a new post</button>
             </div>
         )
     }

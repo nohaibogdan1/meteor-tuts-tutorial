@@ -21,8 +21,6 @@ export default function LoadMorePosts(props) {
     }
 
     return (
-        <div>
-            <button onClick={loadPosts}>Load old posts</button>   
-        </div>
+        <button className="btn btn-outline-primary" style={{marginTop: '20px', marginRight:'10px'}} onClick={loadPosts}>Load old posts</button>   
     )
 }

@@ -29,14 +29,12 @@ export default class PostView extends React.Component {
             return <div>Loading....</div>
         }
         return (
-            <div>
+            <div className="container">
                 <h2>{post.title}</h2>
                 <div>{post.description}</div>
                 <p>{post.postType}</p>
                 <p>{post.views} views</p>
-                <div>
-                    <CommentList postId={post._id}/>
-                </div>
+                <CommentList postId={post._id}/>
             </div>
         )
     }

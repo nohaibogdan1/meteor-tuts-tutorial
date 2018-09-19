@@ -8,13 +8,16 @@ export default PostListDisplay = (props) => {
     if (loading) {
         return <div>Loading...</div>
     }
-    return ( 
-        posts.map((post) => {
-            return (
-                <PostElement key={post._id} post={post} history={history}/>
-            )
-        })
-    )
+    return (
+        <div className="col">
+            {posts.map((post) => {
+                return (
+                    <PostElement  key={post._id} post={post} history={history}/>
+                )
+            })}
+    
+        </div> 
+        )
 } 
 
 PostListDisplay.propTypes = {

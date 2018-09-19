@@ -39,14 +39,14 @@ export default class PostEdit extends React.Component {
             return <div>Loading....</div>
         }
         return (
-            <div className="post">
+            <div className="container" style={{marginTop: "20px"}}>
                 <AutoForm onSubmit={this.submit} schema={FormSchema} model={post}>
                     <AutoField name="title"/>
                     <LongTextField name="description"/>
                     <SelectField name="postType" />
                     <AutoField name="isVisibleForEveryone"/>
-                    <button type='submit'>Edit post</button>
-                    <button onClick={this.navigateToPosts}>Back to posts</button>
+                    <button className="btn btn-outline-primary" type='submit'>Edit post</button>
+                    <button className="btn btn-outline-primary" onClick={this.navigateToPosts}>Back to posts</button>
                 </AutoForm>
             </div>
         )

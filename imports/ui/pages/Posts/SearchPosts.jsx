@@ -22,7 +22,7 @@ export default class SearchPosts extends React.Component {
     render() {
         return (
             <div>
-                <input type="text" value={this.state.searchText||this.props.searchText} onChange={this.changeSearchText}></input>
+                <input className="form-control" type="text" value={this.state.searchText||this.props.searchText} onChange={this.changeSearchText}></input>
             </div>
         );
     }

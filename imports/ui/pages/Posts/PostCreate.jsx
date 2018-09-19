@@ -31,14 +31,14 @@ export default class PostCreate extends React.Component {
 
     render() {
         return (
-            <div className="post">
+            <div className="container" style={{marginTop: "20px"}}>
                 <AutoForm onSubmit={this.submit} schema={FormSchema}>
                     <AutoField name="title" />
                     <LongTextField name="description" />
                     <SelectField name="postType"/>
                     <AutoField name="isVisibleForEveryone"/>
-                    <button type='submit'>Add post</button>
-                    <button onClick={this.navigateToPosts}>Back to posts</button>
+                    <button className="btn btn-outline-primary" type='submit'>Add post</button>
+                    <button className="btn btn-outline-primary" onClick={this.navigateToPosts}>Back to posts</button>
                 </AutoForm>
             </div>
         )
