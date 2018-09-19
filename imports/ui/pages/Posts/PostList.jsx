@@ -6,6 +6,7 @@ import RoutesEnum from '/imports/ui/routes/enums/routes';
 import LoadMorePosts from './LoadMorePosts';
 import CategoryButton from './CategoryButton';
 import {types} from '/imports/db/posts/enums/types';
+import SearchPosts from './SearchPosts';
 
 export default class PostList extends React.Component { 
     constructor(props) {
@@ -83,6 +84,7 @@ export default class PostList extends React.Component {
         }
         return (
             <div>
+                <SearchPosts/>
                 {this.showCategoryButtons()}
                 <PostListDisplayContainer postType={category} lastDate={lastDate} posts={posts} history={this.props.history} setPosts={this.setPosts}/>
                 <LoadMorePosts postType={category} getOldPosts={this.getOldPosts} posts={posts} limit={this.limit}/>
