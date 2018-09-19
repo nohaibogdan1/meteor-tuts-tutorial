@@ -7,24 +7,24 @@ export default class SearchPosts extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchedText: ''
+            searchText: ''
         }
     }
 
-    changeSearchedText = (e) => {
-        const searchedText = e.target.value;
+    changeSearchText = (e) => {
+        const searchText = e.target.value;
         this.searchPosts();
-        this.setState({searchedText});
+        this.setState({searchText});
     }
 
     searchPosts =  _.debounce(() => { 
-        this.props.changeSearchedText(this.state.searchedText);
+        this.props.changeSearchText(this.state.searchText);
     }, 2000);
         
     render() {
         return (
             <div>
-                <input type="text" value={this.state.searchedText} onChange={this.changeSearchedText}></input>
+                <input type="text" value={this.state.searchText} onChange={this.changeSearchText}></input>
             </div>
         );
     }
