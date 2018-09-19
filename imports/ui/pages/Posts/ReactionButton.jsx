@@ -14,9 +14,7 @@ export default class ReactionButton extends React.Component {
 
     render() {
         return (
-            <div>
-                <button onClick={this.handleReaction}>{this.props.text}</button>
-            </div>
+            <button className="btn btn-light btn-sm" onClick={this.handleReaction}>{this.props.text}</button>
         );
     }
 }

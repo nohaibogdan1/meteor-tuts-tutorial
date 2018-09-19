@@ -76,21 +76,23 @@ export default class PostElement extends React.Component {
     render() {
         const {post} = this.props;
         return(
-            <div>
-                <p>Post title: {post.title}</p>
+            <div style={{background: 'rgba(13, 255, 235, 0.1)', marginTop: '20px'}}>
+                <h5>Post title: {post.title}</h5>
                 <p>Post Description: {post.description}</p>
                 <p>#{post.postType}</p>
                 <p>{(post.comments)?post.comments.length:'0'} comments, {post.views} views</p>
-                <button onClick={this.navigateToViewPage}>See post</button>
-                {(post.users && post.users._id === Meteor.userId()) ?
-                    (<div>
-                        <button onClick={this.navigateToEditPage}> Edit post</button>
-                        <button onClick={this.delete}>Delete post</button>
-                    </div>):undefined
-                }
                 <p>{this.state.reactionCurrentUser}</p>
                 <p>{this.state.reactionsNumber?`${this.state.reactionsNumber} reactions`:''}</p>
-                {this.renderReactionButtons()}
+                <div className="btn-group">{this.renderReactionButtons()}</div>
+                <div style={{marginTop: '12px'}}>
+                    <button className="btn btn-outline-success" style={{border: 'none'}} onClick={this.navigateToViewPage}>See post</button>
+                    {(post.users && post.users._id === Meteor.userId()) ?
+                        (<div className="btn-group">
+                            <button className="btn btn-outline-success" style={{border: 'none'}} onClick={this.navigateToEditPage}> Edit post</button>
+                            <button className="btn btn-outline-danger" style={{border: 'none'}} onClick={this.delete}>Delete post</button>
+                        </div>):undefined
+                    }
+                </div>
             </div>
         );
     }

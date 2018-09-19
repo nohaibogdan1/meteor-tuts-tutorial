@@ -7,8 +7,6 @@ export default function CategoryButton(props) {
     }
 
     return (
-        <div>
-            <button onClick={sendCategory}>{category}</button>
-        </div>
+            <button type="button" className="nav-item btn btn-outline-primary btn-lg" onClick={sendCategory}>{category}</button>
     )
 }

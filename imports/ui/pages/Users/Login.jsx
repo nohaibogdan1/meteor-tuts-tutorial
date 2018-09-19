@@ -23,13 +23,13 @@ export default class Login extends React.Component {
 
     render() {
         return (
-            <div className="authentication">
+            <div className="authentication container" style={{marginTop: "20px"}}>
                 <AutoForm onSubmit={this.handleLogin} schema={LoginSchema}>
                     <ErrorsField/>
                     <AutoField name="email"
                         placeholder="Email"/>
                     <AutoField name="password" type="password" placeholder="Password"/>
-                    <button type="submit">Login</button>
+                    <button className="btn btn-outline-primary" type="submit">Login</button>
                 </AutoForm>
             </div>
         )

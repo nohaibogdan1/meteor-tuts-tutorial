@@ -28,13 +28,13 @@ export default class Register extends Component {
 
     render() {
         return (
-            <div className="authentication">
+            <div className="authentication container" style={{marginTop: "20px"}}>
                 <AutoForm schema={RegisterSchema} onSubmit={this.onSubmit}>
                     <ErrorsField/>
                     <AutoField name="email" placeholder="Email"/>
                     <AutoField name="password" type="password" placeholder="Password *"/>
                     <AutoField name="confirm_password" type="password" placeholder="Confirm password"/>
-                    <button type="submit">Create account</button>
+                    <button className="btn btn-outline-primary" type="submit">Create account</button>
                 </AutoForm>
             </div>
         )

@@ -55,11 +55,11 @@ export default class CommentList extends React.Component {
             return <div>0 comments</div>;
         }
         return (
-            <div>
+            <div style={{marginTop:'20px'}}>
                 <p>{(comments.length)} comments</p>
                 <AutoForm onSubmit={this.submit} schema={FormSchema}>
                     <LongTextField name="text"/>
-                    <button type="submit">Add</button>
+                    <button className="btn btn-success btn-sm" type="submit">Add</button>
                 </AutoForm>
                 {this.renderComments()};
             </div>
