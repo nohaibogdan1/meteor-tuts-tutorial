@@ -4,8 +4,8 @@ import listPostsQuery from '/imports/api/posts/queries/listPosts';
 import PostListDisplay from './PostListDisplay';
 
 export default PostListDisplayContainer = withTracker((props) => {
-    const {lastDate, postType, setPosts, history} = props;
-    let query = listPostsQuery.clone({createdAt:{"$gt":lastDate}, postType});
+    const {lastDate, postType, setPosts, history, searchedText} = props;
+    let query = listPostsQuery.clone({createdAt:{"$gt":lastDate}, postType, title: {"$regex": `${searchedText}`}});
     const subscriptionHandle = query.subscribe();
     let lastPosts = [];
     if (subscriptionHandle.ready()) {
