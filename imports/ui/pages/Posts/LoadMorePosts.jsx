@@ -4,7 +4,11 @@ import listPostsQuery from '/imports/api/posts/queries/listPosts';
 
 export default function LoadMorePosts(props) {
     loadPosts = () => {
-        const {limit, posts, getOldPosts, postType, searchText} = props;
+        const {limit, posts, getOldPosts, searchText} = props;
+        let {postType} = props;
+        if (postType === 'all') {
+            postType = '';
+        }
         const postsIds = posts.map((post) => {
             return post._id;
         });

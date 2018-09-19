@@ -39,11 +39,12 @@ export default class PostList extends React.Component {
     }
 
     loadFirstPosts = () => {
-        const {category, searchText} = this.state;
-        let filter = {limit: this.limit, postType: category,  title: {"$regex": `${searchText}`}};
-        if (!category || category === 'all'){
-            filter = {limit: this.limit, title: {"$regex": `${searchText}`}};
+        const {searchText} = this.state;
+        let {category} = this.state;
+        if (category === 'all') {
+            category = '';
         }
+        let filter = {limit: this.limit, postType: category,  title: {"$regex": `${searchText}`}};
         listPostsQuery.clone(filter).fetch((err, posts) => {
             if (err) {
                 return console.log(err);
