@@ -11,6 +11,12 @@ export default Posts.createQuery('listPosts', {
         if (params.createdAt) {
             filters.createdAt = params.createdAt;
         }
+        if (params.postType) {
+            filters.postType = params.postType;
+        }
+        if (params.title) {
+            filters.title = params.title;
+        }
     },
     $options: { sort: {createdAt: -1}},
     $paginate: true,

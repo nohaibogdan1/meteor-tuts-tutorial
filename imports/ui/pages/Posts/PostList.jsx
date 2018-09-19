@@ -4,6 +4,9 @@ import listPostsQuery from '/imports/api/posts/queries/listPosts';
 import PostListDisplayContainer from './PostListDisplayContainer';
 import RoutesEnum from '/imports/ui/routes/enums/routes';
 import LoadMorePosts from './LoadMorePosts';
+import CategoryButton from './CategoryButton';
+import {types} from '/imports/db/posts/enums/types';
+import SearchPosts from './SearchPosts';
 
 export default class PostList extends React.Component { 
     constructor(props) {
@@ -11,9 +14,13 @@ export default class PostList extends React.Component {
         this.state = {
             loading: true,
             posts: [],
-            lastDate: null
+            lastDate: null,
+            category: '',
+            searchText: ''
         }
     }
+
+    limit = 2;
 
     setPosts = (lastPosts) => {
         this.setState((prevState) => ({
@@ -28,16 +35,27 @@ export default class PostList extends React.Component {
     }
 
     componentDidMount() {
-        const limit = 2;
-        listPostsQuery.clone({limit}).fetch((err, posts) => {
+        this.loadFirstPosts();
+    }
+
+    loadFirstPosts = () => {
+        const {searchText} = this.state;
+        let {category} = this.state;
+        if (category === 'all') {
+            category = '';
+        }
+        let filter = {limit: this.limit, postType: category,  title: {"$regex": `${searchText}`}};
+        listPostsQuery.clone(filter).fetch((err, posts) => {
             if (err) {
                 return console.log(err);
             }
-            this.setState({
-                posts,
-                loading: false,
-                lastDate: posts[0].createdAt
-            });
+            this.setState({loading: false});
+            if (posts.length) {
+                this.setState({
+                    posts,                    
+                    lastDate: posts[0].createdAt
+                });
+            }
         });
     }
 
@@ -45,18 +63,39 @@ export default class PostList extends React.Component {
         this.setState((prevState) => ({
             posts: [...prevState.posts, ...oldPosts]
         }));
-
     }
 
+    changeCategory = (category) => {
+        this.setState({category, posts: [], loading: true});
+    }
+
+    changeSearchText = (searchText) => {
+        this.setState({posts: [], loading: true, searchText});
+    }
+
+    showCategoryButtons = () => {
+        const categories = [...types, 'all'];
+        return categories.map((category) => {
+                return (
+                    <CategoryButton key={category} category={category} changeCategory={this.changeCategory}/>
+                )
+        });
+    }   
+
     render() {
-        const {loading, posts, lastDate} = this.state;
+        const {category ,loading , posts, lastDate, searchText} = this.state;
         if (loading) {
+            this.loadFirstPosts();
             return <div>...loading</div>
         }
         return (
             <div>
-                <PostListDisplayContainer lastDate={lastDate} posts={posts} history={this.props.history} setPosts={this.setPosts}/>
-                <LoadMorePosts getOldPosts={this.getOldPosts} posts={posts} limit={2}/>
+                <SearchPosts changeSearchText={this.changeSearchText} searchText={searchText}/>
+                {this.showCategoryButtons()}
+                <PostListDisplayContainer postType={category} lastDate={lastDate} posts={posts} 
+                    history={this.props.history} setPosts={this.setPosts}
+                    searchText={searchText}/>
+                <LoadMorePosts postType={category} getOldPosts={this.getOldPosts} posts={posts} limit={this.limit} searchText={searchText}/>
                 <button onClick={this.navigateToCreatePage}>Create a new post</button>
             </div>
         )
