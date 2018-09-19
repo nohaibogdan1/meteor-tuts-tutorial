@@ -15,7 +15,8 @@ export default class PostList extends React.Component {
             loading: true,
             posts: [],
             lastDate: null,
-            category: null
+            category: '',
+            searchText: ''
         }
     }
 
@@ -37,21 +38,20 @@ export default class PostList extends React.Component {
         this.loadFirstPosts();
     }
 
-    loadFirstPosts = (category) => {
-        this.setState({category});
-        let filter = {limit: this.limit, postType: category};
+    loadFirstPosts = () => {
+        const {category, searchText} = this.state;
+        let filter = {limit: this.limit, postType: category,  title: {"$regex": `${searchText}`}};
         if (!category || category === 'all'){
-            filter = {limit: this.limit};
+            filter = {limit: this.limit, title: {"$regex": `${searchText}`}};
         }
-        this.setState({posts: []});
         listPostsQuery.clone(filter).fetch((err, posts) => {
             if (err) {
                 return console.log(err);
             }
+            this.setState({loading: false});
             if (posts.length) {
                 this.setState({
-                    posts,
-                    loading: false,
+                    posts,                    
                     lastDate: posts[0].createdAt
                 });
             }
@@ -65,7 +65,11 @@ export default class PostList extends React.Component {
     }
 
     changeCategory = (category) => {
-        this.loadFirstPosts(category);
+        this.setState({category, posts: [], loading: true});
+    }
+
+    changeSearchText = (searchText) => {
+        this.setState({posts: [], loading: true, searchText});
     }
 
     showCategoryButtons = () => {
@@ -78,16 +82,20 @@ export default class PostList extends React.Component {
     }   
 
     render() {
-        const {category ,loading , posts, lastDate} = this.state;
+        
+        const {category ,loading , posts, lastDate, searchText} = this.state;
         if (loading) {
+            this.loadFirstPosts();
             return <div>...loading</div>
         }
         return (
             <div>
-                <SearchPosts/>
+                <SearchPosts changeSearchText={this.changeSearchText}/>
                 {this.showCategoryButtons()}
-                <PostListDisplayContainer postType={category} lastDate={lastDate} posts={posts} history={this.props.history} setPosts={this.setPosts}/>
-                <LoadMorePosts postType={category} getOldPosts={this.getOldPosts} posts={posts} limit={this.limit}/>
+                <PostListDisplayContainer postType={category} lastDate={lastDate} posts={posts} 
+                    history={this.props.history} setPosts={this.setPosts}
+                    searchText={searchText}/>
+                <LoadMorePosts postType={category} getOldPosts={this.getOldPosts} posts={posts} limit={this.limit} searchText={searchText}/>
                 <button onClick={this.navigateToCreatePage}>Create a new post</button>
             </div>
         )
