@@ -26,7 +26,7 @@ export default class Login extends React.Component {
             requestPermissions: ['email']
         }, (err) => {
             if (err) {
-                return console.log(err);
+                return alert('You can log in with facebook now');
             }
             this.props.history.push(RoutesEnum.POSTS_REACTIVE);
         });
