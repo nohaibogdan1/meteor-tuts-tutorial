@@ -24,3 +24,5 @@ react-meteor-data
 alanning:roles
 cultofcoders:mocha
 cultofcoders:grapher
+accounts-facebook
+service-configuration
