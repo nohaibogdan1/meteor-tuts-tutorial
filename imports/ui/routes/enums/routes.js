@@ -5,7 +5,8 @@ const RoutesEnum = {
     POSTS_EDIT: '/posts/edit/:_id',
     POSTS_VIEW: '/posts/view/:_id',
     REGISTER: '/register',
-    LOGIN: '/login'
+    LOGIN: '/login',
+    CHAT: '/chat'
 }
 
 export default RoutesEnum;
