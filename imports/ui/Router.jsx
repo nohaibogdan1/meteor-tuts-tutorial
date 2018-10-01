@@ -10,6 +10,7 @@ import Register from './pages/Users/Register';
 import Login from './pages/Users/Login';
 import RoutesEnum from './routes/enums/routes';
 import PostList from './pages/Posts/PostList';
+import ChatLayout from './pages/chat/ChatLayout';
 
 const Router = () =>
     <App>
@@ -20,6 +21,7 @@ const Router = () =>
         <Route exact path={RoutesEnum.POSTS_VIEW} component={PostView} />
         <Route exact path={RoutesEnum.REGISTER} component={Register} />
         <Route exact path={RoutesEnum.LOGIN} component={Login} />
+        <Route exact path={RoutesEnum.CHAT} component={ChatLayout} />
     </App>
 
 export default Router;
