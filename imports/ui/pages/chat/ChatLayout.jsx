@@ -1,6 +1,6 @@
 import React from 'react';
 
-import UserList from './UserList';
+import ChatUserList from './ChatUserList';
 import MessageListContainer from '../messages/MessageListContainer';
 
 export default class ChatLayout extends React.Component {
@@ -30,7 +30,7 @@ export default class ChatLayout extends React.Component {
                     backgroundColor: 'red',
                     width: '30rem',
                 }}>
-                    <UserList getMessages={this.getMessages}/>
+                    <ChatUserList getMessages={this.getMessages}/>
                 </div>
 
                 <div style={{
