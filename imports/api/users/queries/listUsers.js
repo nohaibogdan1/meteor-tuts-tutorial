@@ -10,5 +10,6 @@ export default Users.createQuery('listUsers', {
         }
     },
 
-    _id: 1
+    _id: 1,
+    emailAddress: 1 
 });
