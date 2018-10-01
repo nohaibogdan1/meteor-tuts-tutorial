@@ -1,8 +1,12 @@
 import {Meteor} from 'meteor/meteor'
-import registerUser from '/imports/api/users/registerUser';
+import UserService from '/imports/api/users/userService';
 
 Meteor.methods({
     'user.register' (data) {
-        registerUser(data);
+        UserService.registerUser(data);
+    },
+
+    'user.list' () {
+        return UserService.listUsers(this.userId);
     }
 });
