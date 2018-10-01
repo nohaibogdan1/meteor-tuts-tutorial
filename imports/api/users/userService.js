@@ -11,6 +11,10 @@ export default class registerUser {
         Accounts.createUser({ email, password });
     }
 
+    static getUser (userId) {
+        return listUsersQuery.clone({_id: userId}).fetchOne();
+    }
+
     static listUsers (userId) {
         return listUsersQuery.clone({_id: {$ne : userId}}).fetch();
     }
