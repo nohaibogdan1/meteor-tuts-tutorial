@@ -5,7 +5,7 @@ import MessageList from './MessageList';
 
 export default MessageListContainer = withTracker((props) => { 
     const {otherUserId} = props;
-    const query = listMessagesQuery.clone({otherUserId});
+    const query = listMessagesQuery.clone({otherUserId: {$in: [otherUserId, Meteor.userId()]}});
     const subscriptionHandle = query.subscribe();
     return {
         loading: !subscriptionHandle.ready(),
