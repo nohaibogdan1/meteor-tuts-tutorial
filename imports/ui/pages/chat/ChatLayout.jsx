@@ -2,6 +2,7 @@ import React from 'react';
 
 import ChatUserList from './ChatUserList';
 import MessageListContainer from '../messages/MessageListContainer';
+import MessageBox from '../messages/MessageBox';
 
 export default class ChatLayout extends React.Component {
     constructor() {
@@ -38,6 +39,10 @@ export default class ChatLayout extends React.Component {
                     width:'70rem'
                 }}>
                     <MessageListContainer otherUserId={otherUserId}/>
+                </div>
+
+                <div>
+                    <MessageBox otherUserId={otherUserId}/>
                 </div>
             </div>
         )
