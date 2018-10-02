@@ -5,6 +5,7 @@ import FormSchema from './schema';
 
 export default MessageBox = (props) => {
     const {otherUserId} = props;
+    console.log('messagebox', props);
     submit = ({text}) => {
         Meteor.call('secured.message_create',{text, otherUserId}, (err) => {
             if (err) {

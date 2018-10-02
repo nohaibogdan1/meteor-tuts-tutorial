@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export default MessageList = (props) => {
     const {messages, loading} = props;
     if (loading) {

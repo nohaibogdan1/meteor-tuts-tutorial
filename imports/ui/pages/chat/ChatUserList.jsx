@@ -22,7 +22,6 @@ export default class UserList extends React.Component {
         });
     }
 
-
     sendUserId = (otherUserId) => {
         this.props.getMessages(otherUserId);
     }
